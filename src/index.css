@@ -7,3 +7,12 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+.collapse-title {
+  padding: 0rem;
+  padding-right: 0rem;
+}
+
+.text-white {
+  color: white !important;
+}
