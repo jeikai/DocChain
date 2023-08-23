@@ -28,7 +28,7 @@ const Sidebar = () => {
               <span className='text-sm'>Dashboard</span>
             </a>
           </li>
-          <li className='mx-1 my-2'>
+          {/* <li className='mx-1 my-2'>
             <a className='flex items-center px-4 py-2 gap-2' href="">
               <AccountBoxOutlinedIcon sx={{ fontSize: 20 }} />
               <span className='text-sm'>My Admin</span>
@@ -77,7 +77,7 @@ const Sidebar = () => {
               <StorefrontOutlinedIcon sx={{ fontSize: 20 }} />
               <span className='text-sm flex-1'>ProofGuard E-Shop</span>
             </a>
-          </li>
+          </li> */}
         </ul>
         <div className='mt-auto py-4 absolute bottom-0 w-full'>
         <div className='w-fit flex justify-center gap-2 border-[1.5px] m-auto bg-slate-200 p-1  rounded-xl'>

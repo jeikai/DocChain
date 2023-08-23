@@ -14,8 +14,11 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@thirdweb-dev/react": "^3.14.35",
+    "@thirdweb-dev/sdk": "^3.10.54",
     "animate.css": "^4.1.1",
     "axios": "^1.4.0",
+    "ethers": "^5.7.2",
     "mindee": "^4.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -23,7 +26,17 @@
     "react-scripts": "5.0.1",
     "react-virtuoso": "^4.5.0",
     "tesseract.js": "^4.1.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+
+    "url": "latest",
+    "http": "npm:http-browserify",
+    "https": "npm:https-browserify",
+    "zlib": "npm:browserify-zlib",
+    "http-browserify": "latest",
+    "https-browserify": "latest",
+    "browserify-zlib": "latest",
+    "assert": "^2.0.0",
+    "stream": "^0.0.2"
   },
   "scripts": {
     "start": "react-scripts start",
