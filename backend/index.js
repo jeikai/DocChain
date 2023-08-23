@@ -12,12 +12,15 @@ const client = new vision.ImageAnnotatorClient({
 });
 
 const detectText = async (file_path) => {
-
     let [result] = await client.textDetection(file_path);
-    console.log(result.fullTextAnnotation.text);
+    let [label] = await client.labelDetection(file_path);
+    let [face] = await client.faceDetection(file_path);
+    console.log(face)
+    return result.fullTextAnnotation.text;
 };
 
-detectText('./anh_ielts.jpg');
+detectText('./anh_ielts2.jpg')
+detectText('./ava.png')
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}/`);
 });
