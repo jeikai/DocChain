@@ -1,11 +1,23 @@
 import React, { useEffect, useRef, useState } from "react";
 import cloud from "../assets/cloud.png";
+import { useStorageUpload } from "@thirdweb-dev/react";
+import { async } from "q";
+
 const DropImageInput = () => {
   const [file, setFile] = useState();
   const inputFileRef = useRef(null);
   const [blob, setBlob] = useState("");
   const [isDragEnter, setIsDragEnter] = useState(false);
-
+  const { mutateAsync: upload } = useStorageUpload();
+  const [img, setImg] = useState('')
+  const handleSubmit = async () => {
+    const uploadUrl = await upload({
+      data: [file],
+      options: { uploadWithGatewayUrl: true, uploadWithoutDirectory: true },
+    });
+    console.log(uploadUrl)
+    setImg(uploadUrl[0])
+  }
   useEffect(() => {
     if (file) {
       setBlob(URL.createObjectURL(file));
@@ -63,6 +75,7 @@ const DropImageInput = () => {
     };
   }, []);
   return (
+    <>
     <div
         style={{
             "--bg": `url(${blob})`,
@@ -87,6 +100,9 @@ const DropImageInput = () => {
         Browse files to upload Or Drop files here...
       </p>
     </div>
+    <button type="button" onClick={handleSubmit}>Submit</button>
+    <img src={img} alt="" />
+          </>
   );
 };
 
