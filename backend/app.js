@@ -7,6 +7,8 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const ggv = require('./routes/ggVison')
+const esign = require('./routes/esign')
+
 const cors = require('cors');
 const vision = require('@google-cloud/vision')
 const mindee = require("mindee");
@@ -29,6 +31,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/ggv', ggv)
+app.use('/esign', esign)
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
