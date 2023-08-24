@@ -5,7 +5,6 @@ import Header from '../Header';
 import Layouts from './Layout';
 
 const View = (props) => {
-    console.log(props);
     const layouts = {
         user: UserLayout,
         view: Layouts

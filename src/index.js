@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 // import { ThirdwebProvider } from "@thirdweb-dev/react";
+// import { ThirdwebProvider, useContract } from "@thirdweb-dev/react";
 
 import {
   ThirdwebProvider,
@@ -19,7 +20,7 @@ root.render(
   <React.StrictMode>
     <ThirdwebProvider
      activeChain="ethereum"
-     clientId="e5d908e99d060e2ef06da7debf4e6613"
+     clientId="17b6d0dbbd7024345d11fd1b414da6c5"
      supportedWallets={[
       metamaskWallet(),
       coinbaseWallet(),

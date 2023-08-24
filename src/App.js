@@ -5,11 +5,14 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import View from './components/Layout/view';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import { useUser } from "@thirdweb-dev/react";
-
+import { useUser, useAddress, useContract } from "@thirdweb-dev/react";
+import { useEffect } from 'react';
+// "https://17b6d0dbbd7024345d11fd1b414da6c5.ipfscdn.io/ipfs/bafybeie3aqwskrjvziy4tdbrprlad3c6kqy5huox6rqfaxegdvpbvocvye/"
 function App() {
-  const { user, isLoggedIn, isLoading } = useUser();
-  console.log(user, isLoggedIn, isLoading)
+  const address = useAddress();
+  const { contract, isLoading: isContract } = useContract(address)
+  console.log(contract);
+  console.log(address);
   const darkTheme = createTheme({
     palette: {
       mode: 'dark',
@@ -23,7 +26,6 @@ function App() {
       <Routes>
         {
           routes.map((route, index) => {
-            console.log(route);
             return (
               <Route
                 key={index}
