@@ -71,7 +71,7 @@ const DropImageInput = () => {
       onDragEnter={onDragEnter}
       onDragLeave={onDragLeave}
       onClick={() => inputFileRef.current && inputFileRef.current.click()}
-      className={`${blob ? "before-bg-file" : ""} relative p-6 cursor-pointer h-[400px] w-[570px] mx-auto mt-10 border-2 border-dashed border-black flex flex-col items-center justify-center text-base leading-[1.6] select-none`}
+      className={`${blob ? "before-bg-file" : ""} relative p-6 cursor-pointer h-[400px] w-[570px] mx-auto mt-10 border-2 border-dashed  flex flex-col items-center justify-center text-base leading-[1.6] select-none`}
     >
       <input
         ref={inputFileRef}

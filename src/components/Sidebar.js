@@ -16,7 +16,7 @@ import ChevronRightOutlinedIcon from '@mui/icons-material/ChevronRightOutlined'
 import { grey, blue } from '@mui/material/colors';
 const Sidebar = () => {
   return (
-    <aside className='fixed top-0 bottom-0 z-10 w-[250px] bg-white shadow-md'>
+    <aside className='fixed top-0 bottom-0 z-10 w-[250px] shadow-md'>
       <div className='relative h-[100vh] pb-30px overflow-y-auto overflow-x-hidden'>
         <nav>
           <span className='block px-4 py-4 text-xl font-semibold'>ProofGuard</span>

@@ -18,7 +18,7 @@ const View = (props) => {
       return false;
   
   return (
-    <main className='flex w-full h-full'>
+    <main className='flex w-screen h-screen'>
       <Sidebar />
       <div className='dashboard-content ml-[250px] w-full'>
         <Header />

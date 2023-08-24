@@ -3,9 +3,19 @@ import './App.css';
 import {routes} from './routes/index'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import View from './components/Layout/view';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
 
 function App() {
+  const darkTheme = createTheme({
+    palette: {
+      mode: 'dark',
+    },
+  });
   return (
+    <ThemeProvider theme={darkTheme}>
+      <CssBaseline />
+
     <Router>
       <Routes>
         {
@@ -24,6 +34,8 @@ function App() {
         }
       </Routes>
     </Router>
+    </ThemeProvider>
+
   );
 }
 
