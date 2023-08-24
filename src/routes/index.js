@@ -1,9 +1,30 @@
-import Upload from "../pages/Upload/Upload";
-import Dashboard from "../pages/Dashboard/Dashboard";
-import Demo_Upload from "../pages/Upload/Demo_Upload";
+import { DropImageInput, Transaction, ViewTable } from "../components";
+import FormInfo from "../components/FormInfo";
 const routes = [
-    {path: '/dashboard', component: Dashboard, title: 'Dashboard'},
-    {path: '/upload', component: Demo_Upload, title: 'Upload'},
+    {
+        path: '/', 
+        component: ViewTable, 
+        title: 'View Table',
+        layout: 'view',
+    },
+    {
+        path: '/user', 
+        component: DropImageInput, 
+        title: 'User',
+        layout: 'user',
+    },
+    {
+        path: '/user/form', 
+        component: FormInfo, 
+        title: 'User',
+        layout: 'user',
+    },
+    {
+        path: '/dashboard', 
+        component: Transaction, 
+        title: 'Transaction',
+        layout: 'view',
+    },
 ]
 
 export {routes}
