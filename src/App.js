@@ -7,7 +7,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { useUser, useAddress, useContract } from "@thirdweb-dev/react";
 import { useEffect } from 'react';
-
+// "https://17b6d0dbbd7024345d11fd1b414da6c5.ipfscdn.io/ipfs/bafybeie3aqwskrjvziy4tdbrprlad3c6kqy5huox6rqfaxegdvpbvocvye/"
 function App() {
   const address = useAddress();
   const { contract, isLoading: isContract } = useContract(address)
