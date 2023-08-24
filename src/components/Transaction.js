@@ -27,7 +27,7 @@ import { grey } from "@mui/material/colors";
 const Transaction = () => {
     const TableHeader = ['No', 'Property Address', 'Date Submitted', 'Days Pending', 'Document Name / Remarks', 'Status', 'Action Required']
     const TableData = [
-        {
+        { 
             id: 1,
             address: '101 BLOCK 101, BISHAN STREER 12 ##13 S570101',
             date: '18/04/2023',
