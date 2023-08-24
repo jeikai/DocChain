@@ -19,8 +19,8 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <ThirdwebProvider
-     activeChain="ethereum"
-     clientId="17b6d0dbbd7024345d11fd1b414da6c5"
+     activeChain="mumbai"
+     clientId="8871730bcabdc8f95e4024474e5566bb"
      supportedWallets={[
       metamaskWallet(),
       coinbaseWallet(),
