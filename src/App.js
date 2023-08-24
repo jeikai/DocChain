@@ -5,8 +5,11 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import View from './components/Layout/view';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import { useUser } from "@thirdweb-dev/react";
 
 function App() {
+  const { user, isLoggedIn, isLoading } = useUser();
+  console.log(user, isLoggedIn, isLoading)
   const darkTheme = createTheme({
     palette: {
       mode: 'dark',
