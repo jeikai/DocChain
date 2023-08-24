@@ -9,9 +9,6 @@ var usersRouter = require('./routes/users');
 const ggv = require('./routes/ggVison')
 const cors = require('cors');
 const vision = require('@google-cloud/vision')
-const mindee = require("mindee");
-
-
 
 var app = express();
 app.use(cors());
@@ -45,17 +42,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-const client = new vision.ImageAnnotatorClient({
-  keyFilename: './APIKey.json'
-});
-
-const detectText = async (file_path) => {
-
-  let [result] = await client.textDetection(file_path);
-  console.log(result.fullTextAnnotation.text);
-};
-
-// detectText('./anh_ielts.jpg');
 
 module.exports = app;

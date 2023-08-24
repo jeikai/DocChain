@@ -19,8 +19,7 @@ const detectText = async (file_path) => {
     return result.fullTextAnnotation.text;
 };
 
-detectText('./anh_ielts2.jpg')
-detectText('./ava.png')
+
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}/`);
 });
