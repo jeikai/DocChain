@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import cloud from "../assets/cloud.png";
 import { useAddress, useContract, useContractWrite, useStorageUpload } from "@thirdweb-dev/react";
 import { async } from "q";
-
+import { ethers } from "ethers";
 const DropImageInput = () => {
   const [file, setFile] = useState();
   const inputFileRef = useRef(null);
@@ -10,23 +10,20 @@ const DropImageInput = () => {
   const [isDragEnter, setIsDragEnter] = useState(false);
   const { mutateAsync: upload } = useStorageUpload();
   const [img, setImg] = useState('')
-  
+
   const contract_address = '0x259EDE541EBF509B7e72A9dfb42181900b4947b6'
   const address = useAddress();
   const { contract, isLoading } = useContract(contract_address)
   const { mutateAsync: storeImageData } = useContractWrite(contract, "storeImageData")
-
   const call = async (_url, _sender, _fileName) => {
     try {
-      const data = await storeImageData({ args: [_url, _sender, _fileName] });
+
+      const data = await storeImageData({ args: [_url, _fileName] });
       console.info("contract call successs", data);
     } catch (err) {
       console.error("contract call failure", err);
     }
-  }
-  // useEffect(() => {
-  //   // call()
-  // }, [contract])
+  };
 
   const handleSubmit = async () => {
     const uploadUrl = await upload({
@@ -95,33 +92,33 @@ const DropImageInput = () => {
   }, []);
   return (
     <>
-    <div
+      <div
         style={{
-            "--bg": `url(${blob})`,
+          "--bg": `url(${blob})`,
         }}
-      onDrop={onDrop}
-      onDragEnter={onDragEnter}
-      onDragLeave={onDragLeave}
-      onClick={() => inputFileRef.current && inputFileRef.current.click()}
-      className={`${blob ? "before-bg-file" : ""} relative p-6 cursor-pointer h-[400px] w-[570px] mx-auto mt-10 border-2 border-dashed  flex flex-col items-center justify-center text-base leading-[1.6] select-none`}
-    >
-      <input
-        ref={inputFileRef}
-        onChange={onFileChange}
-        type="file"
-        accept="image/*"
-        hidden
-      />
-      <div className="bg-black">
-        <img src={cloud} alt="" />
+        onDrop={onDrop}
+        onDragEnter={onDragEnter}
+        onDragLeave={onDragLeave}
+        onClick={() => inputFileRef.current && inputFileRef.current.click()}
+        className={`${blob ? "before-bg-file" : ""} relative p-6 cursor-pointer h-[400px] w-[570px] mx-auto mt-10 border-2 border-dashed  flex flex-col items-center justify-center text-base leading-[1.6] select-none`}
+      >
+        <input
+          ref={inputFileRef}
+          onChange={onFileChange}
+          type="file"
+          accept="image/*"
+          hidden
+        />
+        <div className="bg-black">
+          <img src={cloud} alt="" />
+        </div>
+        <p className="text-center my-3 pointer-events-none text-xl font-semibold">
+          Browse files to upload Or Drop files here...
+        </p>
       </div>
-      <p className="text-center my-3 pointer-events-none text-xl font-semibold">
-        Browse files to upload Or Drop files here...
-      </p>
-    </div>
-    <button type="button" onClick={handleSubmit}>Submit</button>
-    <img src={img} alt="" />
-          </>
+      <button type="button" onClick={handleSubmit}>Submit</button>
+      <img src={img} alt="" />
+    </>
   );
 };
 

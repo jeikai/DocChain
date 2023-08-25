@@ -20,6 +20,7 @@
     "animate.css": "^4.1.1",
     "assert": "^2.0.0",
     "axios": "^1.4.0",
+    "big-integer": "^1.6.51",
     "browserify-zlib": "latest",
     "ethers": "^5.7.2",
     "http": "npm:http-browserify",
