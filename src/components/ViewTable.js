@@ -13,7 +13,7 @@ import { useContract, useContractRead } from "@thirdweb-dev/react";
 
 
 const ViewTable = () => {
-  const { contract } = useContract("0x5DD5BfC7d269a8A3c1e1B7d68D50C2f94FA1B81D");
+  const { contract } = useContract(process.env.REACT_APP_ADDRESS_CONTRACT);
   const { data, isLoading } = useContractRead(contract, "getAllData")
   console.log(data)
   const [showModal, setShowModal] = useState(false)
@@ -40,7 +40,7 @@ const ViewTable = () => {
         <div class="w-full lg:w-5/6">
           <div className='flex justify-end w-full'>
             <div className='border-2 flex items-center gap-2 rounded-md py-2 px-4 cursor-pointer'
-              onClick={() => navigate('/user')}
+              onClick={() => navigate('/upload')}
             >
               <PublishRoundedIcon/>
               <span>Upload</span>

@@ -1,27 +1,81 @@
-pragma solidity ^0.8.0;
-contract ImageStorageContract {
+pragma solidity ^0.8.9;
+
+contract DocContract {
+    uint256 imageCount;
     struct ImageData {
-        bytes32 hash;
+        string hash;
         address sender;
         string imageName;
+        uint256 timestamp;
     }
-    mapping(uint256 => ImageData) private images;
-    uint256 private imageCount;
-    event ImageStored(bytes32 hash, address sender, string imageName);
+    ImageData[] images;
+    event ImageStored(
+        string hash,
+        address sender,
+        string imageName,
+        uint256 timestamp
+    );
 
-
-    function storeImageData(bytes32 _hash, address _sender, string memory _imageName) public {
+    function storeImageData(
+        string memory _hash,
+        string memory _imageName
+    ) public {
         imageCount++;
-        images[imageCount] = ImageData(_hash, _sender, _imageName);
-        emit ImageStored(_hash, _sender, _imageName);
+        images.push(ImageData(_hash, msg.sender, _imageName, block.timestamp));
+        emit ImageStored(_hash, msg.sender, _imageName, block.timestamp);
     }
 
     function getAllData() public view returns (ImageData[] memory) {
-        ImageData[] memory allImageData = new ImageData[](imageCount);
-        for (uint256 i = 1; i <= imageCount; i++) {
-            allImageData[i - 1] = images[i];
-        }
-        return allImageData;
+        return images;
+    }
+
+    struct SignedData {
+        string hash;
+        address sender;
+        address signer;
+        string imageName;
+        uint256 timestamp;
+        string publicKey;
+    }
+    uint256 dataCount;
+    SignedData[] data;
+    event DataStored(
+        string hash,
+        address sender,
+        address signer,
+        string imageName,
+        uint256 timestamp,
+        string publicKey
+    );
+
+    function storeSignedData(
+        string memory _hash,
+        address _sender,
+        string memory _imageName,
+        string memory _publicKey
+    ) public {
+        dataCount++;
+        data.push(
+            SignedData(
+                _hash,
+                _sender,
+                msg.sender,
+                _imageName,
+                block.timestamp,
+                _publicKey
+            )
+        );
+        emit DataStored(
+            _hash,
+            _sender,
+            msg.sender,
+            _imageName,
+            block.timestamp,
+            _publicKey
+        );
+    }
+
+    function getAllSigned() public view returns (SignedData[] memory) {
+        return data;
     }
 }
-

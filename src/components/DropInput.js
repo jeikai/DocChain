@@ -11,9 +11,8 @@ const DropImageInput = () => {
   const { mutateAsync: upload } = useStorageUpload();
   const [img, setImg] = useState('')
   
-  const contract_address = '0x5DD5BfC7d269a8A3c1e1B7d68D50C2f94FA1B81D'
   const address = useAddress();
-  const { contract, isLoading } = useContract(contract_address)
+  const { contract, isLoading } = useContract(process.env.REACT_APP_ADDRESS_CONTRACT)
   const { mutateAsync: storeImageData } = useContractWrite(contract, "storeImageData")
 
   const call = async (_url, _fileName) => {
@@ -30,7 +29,7 @@ const DropImageInput = () => {
       data: [file],
       options: { uploadWithGatewayUrl: true, uploadWithoutDirectory: true },
     });
-    console.log(uploadUrl)
+    // console.log(uploadUrl[0], file.name)
     // setImg(uploadUrl[0])
     call(uploadUrl[0], file.name)
   }

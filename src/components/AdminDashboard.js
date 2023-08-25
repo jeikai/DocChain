@@ -15,11 +15,24 @@ import { useContract, useContractRead } from "@thirdweb-dev/react";
 
 
 const ViewTable = () => {
-  const { contract } = useContract("0x5DD5BfC7d269a8A3c1e1B7d68D50C2f94FA1B81D");
-  const { data, isLoading } = useContractRead(contract, "getAllData")
+  const { contract } = useContract(process.env.REACT_APP_ADDRESS_CONTRACT);
+  const { data } = useContractRead(contract, "getAllData")
+  const { data: data2 } = useContractRead(contract, "getAllSigned")
+
+  const filterDuplicates = (arr1, arr2, key) => {
+    const uniqueElements = arr1?.filter(obj1 => {
+      return !arr2?.some(obj2 => obj2[key] === obj1[key]);
+    });
+    return uniqueElements;
+  };  
+
+  const filteredArray = filterDuplicates(data, data2, 'hash');
+  
+  console.log(filteredArray);
+
   // console.log(data)
   const [showModal, setShowModal] = useState(false)
-  const [image, setImage] = useState('')
+  const [transaction, setTransaction] = useState({})
   const handleOnClose = () => setShowModal(false)
   const navigate = useNavigate()
   useEffect(() => {
@@ -53,7 +66,7 @@ const ViewTable = () => {
                 </tr>
               </thead>
               <tbody class="text-sm">
-                {data?.map((item, index) => {
+                {filteredArray?.map((item, index) => {
                   return (
                     <tr class="border-b border-gray-200 hover:bg-gray-900 text-base">
                         <td class="py-3 px-6 text-left whitespace-nowrap">
@@ -76,7 +89,7 @@ const ViewTable = () => {
                           <div class="flex item-center justify-center">
                             <div className="flex gap-2 items-center border-2 px-4 py-1 rounded-lg cursor-pointer"
                               onClick={() => {
-                                setImage(item.hash)
+                                setTransaction(item)
                                 setShowModal(true)
                               }}
                             >
@@ -89,7 +102,7 @@ const ViewTable = () => {
                           <div className="flex item-center justify-center gap-2">
                             <button 
                                 onClick={() => {
-                                  setImage(item.hash)
+
                                   setShowModal(true)
                                   }}
                                 className="m-auto flex gap-2 justify-center items-center  text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -106,7 +119,7 @@ const ViewTable = () => {
           </div>
         </div>
       </div>
-      <Modal onClose={handleOnClose} visible={showModal} image={image} admin={true} />
+      <Modal onClose={handleOnClose} visible={showModal} transaction={transaction} admin={true} />
     </div>
   );
 };

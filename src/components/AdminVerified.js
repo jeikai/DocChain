@@ -17,9 +17,8 @@ import { useContract, useContractRead } from "@thirdweb-dev/react";
 
 
 const ViewTable = () => {
-  const { contract } = useContract("0x5DD5BfC7d269a8A3c1e1B7d68D50C2f94FA1B81D");
-  const { data, isLoading } = useContractRead(contract, "getAllData")
-  console.log(data)
+  const { contract } = useContract(process.env.REACT_APP_ADDRESS_CONTRACT);
+  const { data, isLoading } = useContractRead(contract, "getAllSigned")
   const [showModal, setShowModal] = useState(false)
   const [image, setImage] = useState('')
   const handleOnClose = () => setShowModal(false)
@@ -40,6 +39,8 @@ const ViewTable = () => {
   const shortenAddress = (address) => `${address.slice(0, 5)}...${address.slice(address.length - 4)}`;
   const shortenPublicKey = (address) => `${address.slice(0, 10)}...${address.slice(address.length - 4)}`;
 
+
+  
 
 
   return (
@@ -93,8 +94,8 @@ const ViewTable = () => {
                         </td>
                         <td class="py-3 px-6 text-center">
                           <div className="flex item-center justify-center gap-4">
-                            <span class="font-medium">{shortenPublicKey(item.sender)}</span>
-                            <ContentCopyIcon onClick={() => copy(item.sender)} className="cursor-pointer"/>
+                            <span class="font-medium">{shortenPublicKey(item.publicKey)}</span>
+                            <ContentCopyIcon onClick={() => copy(item.publicKey)} className="cursor-pointer"/>
                           </div>
                         </td>
                     </tr>
