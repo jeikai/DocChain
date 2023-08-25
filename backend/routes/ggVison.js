@@ -1,10 +1,9 @@
-var express = require('express');
-var router = express.Router();
+const router = require("express").Router();
+const multer = require("multer")
 
+const upload = multer()
+const {detect} = require('../controllers/ggVisionController')
 
-const orc = require('../controllers/ggVisionController')
-
-router.get('/', orc.detect)
-
+router.post('/verify', upload.single("image"), detect)
 
 module.exports = router;

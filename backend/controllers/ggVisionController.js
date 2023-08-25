@@ -46,7 +46,8 @@ function removeSpaces(inputString) {
     return inputString.replace(/\s/g, '');
 }
 exports.detect = async (req, res) => {
-    const file_path = './image/anh_ielts2.jpg';
+    let image = req.file;
+    const file_path = image.buffer;
     try {
         let [text] = await client.textDetection(file_path);
         let [face] = await client.faceDetection(file_path);
@@ -54,6 +55,9 @@ exports.detect = async (req, res) => {
         let logo_detail = logo.logoAnnotations[0];
         let face_detail = face.faceAnnotations[0];
         let newString = removeNewlines(text.fullTextAnnotation.text);
+        const ReportNumber = ExtractValue(newString, "Report Form", RegExp(`\\d{2}\\s?[A-Z]{2}\\d{6}[A-Z]{4}\\s?\\d{3}[A-Z]{1}`)) === null ?
+            ExtractValue(newString, "Report Form", RegExp(`\\d{2}\\s?[A-Z]{2}\\d{6}[A-Z]{3}\\s?\\d{3}[A-Z]{1}`)) :
+            ExtractValue(newString, "Report Form", RegExp(`\\d{2}\\s?[A-Z]{2}\\d{6}[A-Z]{4}\\s?\\d{3}[A-Z]{1}`));
         const promises = [
             ExtractValue(newString, "Centre Number", RegExp(`[a-zA-Z]{${2}}\\d{${3}}[^a-zA-Z0-9\\s]{${0}}`)),
             ExtractValue(newString, "Candidate Number", RegExp(`[a-zA-Z]{${0}}\\d{${6}}[^a-zA-Z0-9\\s]{${0}}`)),
@@ -68,10 +72,10 @@ exports.detect = async (req, res) => {
             ExtractValue(newString, "Date", RegExp(`\\d{2}\\/\\d{2}\\/\\d{4}`)),
             ExtractValue(newString, "Candidate ID", RegExp(`\\d{12}`)),
             ExtractValue(newString, "Sex", RegExp(`[MF]`)),
-            ExtractValue(newString, "Report Form", RegExp(`\\d{2}\\s?[A-Z]{2}\\d{6}[A-Z]{4}\\s?\\d{3}[A-Z]{1}`)
-            ),
+            ExtractValue(newString, "Report Form", RegExp(`\\d{2}\\s?[A-Z]{2}\\d{6}[A-Z]{4}\\s?\\d{3}[A-Z]{1}`)) == null ?
+                ExtractValue(newString, "Report Form", RegExp(`\\d{2}\\s?[A-Z]{2}\\d{6}[A-Z]{3}\\s?\\d{3}[A-Z]{1}`)) :
+                ExtractValue(newString, "Report Form", RegExp(`\\d{2}\\s?[A-Z]{2}\\d{6}[A-Z]{4}\\s?\\d{3}[A-Z]{1}`))
         ];
-        console.log(promises)
         const [
             centreNumber,
             CandidateNumber,
@@ -101,7 +105,7 @@ exports.detect = async (req, res) => {
             Overall: Overall,
             Date_Sign: Date_Sign,
             CandidateId: ID,
-            ReportFormNumber: removeSpaces(ReportFormNumber),
+            ReportFormNumber: ReportFormNumber,
             Sex: Sex,
             rollAngle: face_detail.rollAngle,
             panAngle: face_detail.panAngle,
@@ -109,9 +113,9 @@ exports.detect = async (req, res) => {
             logo_type: logo_detail.description,
             string_check: newString
         }
-        res.json(response);
+        res.json({ response, status: true });
     } catch (error) {
         console.error(error);
-        res.status(500).send('Lỗi rồi');
+        res.status(500).json({ status: false });
     }
 };

@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import cloud from "../assets/cloud.png";
 import { useAddress, useContract, useContractWrite, useStorageUpload } from "@thirdweb-dev/react";
-import { async } from "q";
-import { ethers } from "ethers";
+import axios from "axios";
 const DropImageInput = () => {
   const [file, setFile] = useState();
   const inputFileRef = useRef(null);
@@ -24,15 +23,23 @@ const DropImageInput = () => {
       console.error("contract call failure", err);
     }
   }
-
   const handleSubmit = async () => {
-    const uploadUrl = await upload({
-      data: [file],
-      options: { uploadWithGatewayUrl: true, uploadWithoutDirectory: true },
-    });
-    console.log(uploadUrl)
-    // setImg(uploadUrl[0])
-    call(uploadUrl[0], file.name)
+    const imageData = new FormData();
+    imageData.append("image", file);
+    console.log(imageData)
+    try {
+      // gọi api check AI
+      const response = await axios.post("http://localhost:5000/ggVision/verify", imageData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        }
+      });
+      
+      
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error submitting image:", error);
+    }
   }
   useEffect(() => {
     if (file) {
