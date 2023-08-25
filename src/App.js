@@ -1,12 +1,15 @@
 import Meta from 'antd/es/card/Meta';
 import './App.css';
+import { Landing, Login } from './pages';
+
 import {routes} from './routes/index'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import View from './components/Layout/view';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { useUser, useAddress, useContract, useContractWrite } from "@thirdweb-dev/react";
 import { useEffect } from 'react';
+import { PrivateRoute } from './components';
 // "https://17b6d0dbbd7024345d11fd1b414da6c5.ipfscdn.io/ipfs/bafybeie3aqwskrjvziy4tdbrprlad3c6kqy5huox6rqfaxegdvpbvocvye/"
 function App() {
   // const contract_address = '0x259EDE541EBF509B7e72A9dfb42181900b4947b6'
@@ -31,6 +34,10 @@ function App() {
     },
   });
   return (
+    // <>
+    //   {/* <Landing /> */}
+    //   <Login />
+    // </>
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
 
@@ -43,7 +50,14 @@ function App() {
                 key={index}
                 path={route.path}
                 element={
-                  <View display={ route.component } layout={ route.layout } title={ route.title}/>
+                  <>
+                    {route.permission ?  
+                      <PrivateRoute>
+                        <View display={ route.component } layout={ route.layout } title={ route.title} page={route.page}/>
+                      </PrivateRoute> :
+                      <View display={ route.component } layout={ route.layout } title={ route.title} page={route.page}/>
+                    }
+                  </>
                 }
               />
             )

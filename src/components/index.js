@@ -3,4 +3,5 @@ import Header from "./Header"
 import Transaction from "./Transaction"
 import ViewTable from "./ViewTable"
 import DropImageInput from "./DropInput"
-export {Sidebar, Header, Transaction, ViewTable, DropImageInput}
+import PrivateRoute from "./PrivateRoute"
+export {Sidebar, Header, Transaction, ViewTable, DropImageInput ,PrivateRoute}

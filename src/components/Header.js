@@ -18,7 +18,7 @@ import { ConnectWallet, Web3Button } from "@thirdweb-dev/react";
 const Header = () => {
   const ref = useRef(null)
   return (
-    <div className='header h-16 flex items-center px-8 justify-between w-full shadow-md'>
+    <div className='header h-16 flex items-center px-8 justify-between w-full shadow-lg shadow-gray-800'>
       <div className='header-left flex items-center gap-4'>
         <div>
           <MenuIcon sx={{ color: blue[500], fontSize: 30 }}/>

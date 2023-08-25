@@ -10,9 +10,8 @@ const DropImageInput = () => {
   const { mutateAsync: upload } = useStorageUpload();
   const [img, setImg] = useState('')
   
-  const contract_address = '0xa97B4D937847406BAd9d1Ad29fAfdE7458a0beB0'
   const address = useAddress();
-  const { contract, isLoading } = useContract(contract_address)
+  const { contract, isLoading } = useContract(process.env.REACT_APP_ADDRESS_CONTRACT)
   const { mutateAsync: storeImageData } = useContractWrite(contract, "storeImageData")
 
   const call = async (_url, _fileName) => {
