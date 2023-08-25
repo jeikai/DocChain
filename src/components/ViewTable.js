@@ -9,10 +9,11 @@ import Modal from "./Modal"
 import { useNavigate } from "react-router"
 import { useContract, useContractRead } from "@thirdweb-dev/react";
 const ViewTable = () => {
-  const { contract } = useContract("0x259EDE541EBF509B7e72A9dfb42181900b4947b6");
+  const { contract } = useContract("0xa97B4D937847406BAd9d1Ad29fAfdE7458a0beB0");
   const { data, isLoading } = useContractRead(contract, "getAllData")
   console.log(data)
   const [showModal, setShowModal] = useState(false)
+  const [image, setImage] = useState('')
   const handleOnClose = () => setShowModal(false)
   const navigate = useNavigate()
   useEffect(() => {
@@ -28,7 +29,7 @@ const ViewTable = () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
   }, []);
-
+  const shortenAddress = (address) => `${address.slice(0, 5)}...${address.slice(address.length - 4)}`;
   return (
     <div class="overflow-x-auto mt-12">
       <div class="flex justify-center font-sans overflow-hidden">
@@ -48,7 +49,6 @@ const ViewTable = () => {
                   <th class="py-3 px-6 text-left">No</th>
                   <th class="py-3 px-6 text-left">Name</th>
                   <th class="py-3 px-6 text-left">Upload on</th>
-                  <th class="py-3 px-6 text-center">Type</th>
                   <th class="py-3 px-6 text-center">Resource</th>
                   <th class="py-3 px-6 text-center">Status</th>
                 </tr>
@@ -64,12 +64,12 @@ const ViewTable = () => {
                           </td>
                         <td class="py-3 px-6 text-left whitespace-nowrap">
                           <div class="flex items-center">
-                            <span class="font-medium">{item.sender}</span>
+                            <span class="font-medium">{shortenAddress(item.sender)}</span>
                           </div>
                         </td>
                         <td class="py-3 px-6 text-left">
                           <div class="flex items-center">
-                            <span>{item.timestamp}</span>
+                            <span>{new Date(item.timestamp.toNumber() * 1000).toLocaleString()}</span>
                           </div>
                         </td>
                         {/* <td class="py-3 px-6 text-center">
@@ -80,7 +80,10 @@ const ViewTable = () => {
                         <td class="py-3 px-6 text-center">
                           <div class="flex item-center justify-center">
                             <div className="flex gap-2 items-center border-2 px-4 py-1 rounded-lg cursor-pointer"
-                              onClick={() => setShowModal(true)}
+                              onClick={() => {
+                                setImage(item.hash)
+                                setShowModal(true)
+                              }}
                             >
                               <GetAppIcon />
                               <span>{item.imageName}</span>
@@ -215,7 +218,7 @@ const ViewTable = () => {
           </div>
         </div>
       </div>
-      <Modal onClose={handleOnClose} visible={showModal} />
+      <Modal onClose={handleOnClose} visible={showModal} image={image} />
     </div>
   );
 };

@@ -10,20 +10,20 @@ const DropImageInput = () => {
   const [isDragEnter, setIsDragEnter] = useState(false);
   const { mutateAsync: upload } = useStorageUpload();
   const [img, setImg] = useState('')
-
-  const contract_address = '0x259EDE541EBF509B7e72A9dfb42181900b4947b6'
+  
+  const contract_address = '0xa97B4D937847406BAd9d1Ad29fAfdE7458a0beB0'
   const address = useAddress();
   const { contract, isLoading } = useContract(contract_address)
   const { mutateAsync: storeImageData } = useContractWrite(contract, "storeImageData")
-  const call = async (_url, _sender, _fileName) => {
-    try {
 
+  const call = async (_url, _fileName) => {
+    try {
       const data = await storeImageData({ args: [_url, _fileName] });
       console.info("contract call successs", data);
     } catch (err) {
       console.error("contract call failure", err);
     }
-  };
+  }
 
   const handleSubmit = async () => {
     const uploadUrl = await upload({
@@ -32,7 +32,7 @@ const DropImageInput = () => {
     });
     console.log(uploadUrl)
     // setImg(uploadUrl[0])
-    call(uploadUrl, address, file.name)
+    call(uploadUrl[0], file.name)
   }
   useEffect(() => {
     if (file) {
