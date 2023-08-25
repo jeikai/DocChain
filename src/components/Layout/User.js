@@ -16,13 +16,13 @@ const UserLayout = (props) => {
         <div className='flex gap-2 items-center'>
             <ArrowForwardRoundedIcon sx={{ fontSize: 30 }} />
         </div>
-        <div className='flex gap-2 items-center'>
+        {/* <div className='flex gap-2 items-center'>
             <PermContactCalendarRoundedIcon sx={{ fontSize: 30 }} />
             <span className='border-b-2 mb-2 border-black'>Personal Information</span>
         </div>
         <div className='flex gap-2 items-center'>
             <ArrowForwardRoundedIcon sx={{ fontSize: 30 }} />
-        </div>
+        </div> */}
         <div className='flex gap-2 items-center'>
             <ExpandCircleDownSharpIcon sx={{ fontSize: 30 }} />
             <span className='border-b-2 mb-2 border-black'>Submitting</span>
@@ -31,7 +31,7 @@ const UserLayout = (props) => {
 
       {<props.children {...props.data} />}
       
-      <div className='flex items-center justify-between gap-2 w-full text-xl mt-12'>
+      {/* <div className='flex items-center justify-between gap-2 w-full text-xl mt-12'>
         <div className='flex gap-2 items-center'>
             <WestRoundedIcon sx={{ fontSize: 30 }} />
             <span>Prev</span>
@@ -40,7 +40,7 @@ const UserLayout = (props) => {
             <span>Next</span>
             <ArrowForwardRoundedIcon sx={{ fontSize: 30 }} />
         </div>
-      </div>
+      </div> */}
     </div>
   </div>
   )

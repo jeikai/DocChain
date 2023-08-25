@@ -21,7 +21,7 @@ const DropImageInput = () => {
       console.info("contract call successs", data);
     } catch (err) {
       console.error("contract call failure", err);
-    }
+    } 
   }
   const handleSubmit = async () => {
     const imageData = new FormData();
@@ -34,8 +34,11 @@ const DropImageInput = () => {
           "Content-Type": "multipart/form-data",
         }
       });
-      
-      
+      const uploadUrl = await upload({
+        data: [file],
+        options: { uploadWithGatewayUrl: true, uploadWithoutDirectory: true },
+      });
+      call(uploadUrl[0], file.name)
       console.log(response.data);
     } catch (error) {
       console.error("Error submitting image:", error);

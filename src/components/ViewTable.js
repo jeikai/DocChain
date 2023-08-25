@@ -47,10 +47,10 @@ const ViewTable = () => {
               <thead>
                 <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                   <th class="py-3 px-6 text-left">No</th>
-                  <th class="py-3 px-6 text-left">Name</th>
+                  <th class="py-3 px-6 text-left">Address User</th>
                   <th class="py-3 px-6 text-left">Upload on</th>
                   <th class="py-3 px-6 text-center">Resource</th>
-                  <th class="py-3 px-6 text-center">Status</th>
+                  {/* <th class="py-3 px-6 text-center">Status</th> */}
                 </tr>
               </thead>
               <tbody class="text-gray-600 text-sm">
@@ -90,129 +90,15 @@ const ViewTable = () => {
                             </div>
                           </div>
                         </td>
-                        <td class="py-3 px-6 text-center">
+                        {/* <td class="py-3 px-6 text-center">
                           <div className="flex item-center justify-center gap-2">
                             <DoneIcon sx={{ color: green[800] }} />
                             <span className="font-medium">Approved</span>
                           </div>
-                        </td>
+                        </td> */}
                     </tr>
                   )
                 })}
-                {/* <tr class="border-b border-gray-200 hover:bg-gray-100 text-base">
-                    <td class="py-3 px-6 text-left whitespace-nowrap">
-                        <div class="flex items-center">
-                          <span class="font-medium">1</span>
-                        </div>
-                      </td>
-                    <td class="py-3 px-6 text-left whitespace-nowrap">
-                      <div class="flex items-center">
-                        <span class="font-medium">Ielts 9.0</span>
-                      </div>
-                    </td>
-                    <td class="py-3 px-6 text-left">
-                      <div class="flex items-center">
-                        <span>18/04/2023</span>
-                      </div>
-                    </td>
-                    <td class="py-3 px-6 text-center">
-                      <div class="flex items-center justify-center">
-                        <span>Certification</span>
-                      </div>
-                    </td>
-                    <td class="py-3 px-6 text-center">
-                      <div class="flex item-center justify-center">
-                        <div className="flex gap-2 items-center border-2 px-4 py-1 rounded-lg cursor-pointer"
-                          onClick={() => setShowModal(true)}
-                        >
-                          <GetAppIcon />
-                          <span>ielts_9.0.pdf</span>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="py-3 px-6 text-center">
-                      <div className="flex item-center justify-center gap-2">
-                        <DoneIcon sx={{ color: green[800] }} />
-                        <span className="font-medium">Approved</span>
-                      </div>
-                    </td>
-                </tr>
-                <tr class="border-b border-gray-200 hover:bg-gray-100 text-base">
-                    <td class="py-3 px-6 text-left whitespace-nowrap">
-                        <div class="flex items-center">
-                          <span class="font-medium">1</span>
-                        </div>
-                      </td>
-                    <td class="py-3 px-6 text-left whitespace-nowrap">
-                      <div class="flex items-center">
-                        <span class="font-medium">Ielts 9.0</span>
-                      </div>
-                    </td>
-                    <td class="py-3 px-6 text-left">
-                      <div class="flex items-center">
-                        <span>18/04/2023</span>
-                      </div>
-                    </td>
-                    <td class="py-3 px-6 text-center">
-                      <div class="flex items-center justify-center">
-                        <span>Certification</span>
-                      </div>
-                    </td>
-                    <td class="py-3 px-6 text-center">
-                      <div class="flex item-center justify-center">
-                        <div className="flex gap-2 items-center border-2 px-4 py-1 rounded-lg cursor-pointer"
-                          onClick={() => setShowModal(true)}
-                        >
-                          <GetAppIcon />
-                          <span>ielts_9.0.pdf</span>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="py-3 px-6 text-center">
-                      <div className="flex item-center justify-center gap-2">
-                        <DoneIcon sx={{ color: green[800] }} />
-                        <span className="font-medium">Approved</span>
-                      </div>
-                    </td>
-                </tr>
-                <tr class="border-b border-gray-200 hover:bg-gray-100 text-base">
-                    <td class="py-3 px-6 text-left whitespace-nowrap">
-                        <div class="flex items-center">
-                          <span class="font-medium">1</span>
-                        </div>
-                      </td>
-                    <td class="py-3 px-6 text-left whitespace-nowrap">
-                      <div class="flex items-center">
-                        <span class="font-medium">Ielts 9.0</span>
-                      </div>
-                    </td>
-                    <td class="py-3 px-6 text-left">
-                      <div class="flex items-center">
-                        <span>18/04/2023</span>
-                      </div>
-                    </td>
-                    <td class="py-3 px-6 text-center">
-                      <div class="flex items-center justify-center">
-                        <span>Certification</span>
-                      </div>
-                    </td>
-                    <td class="py-3 px-6 text-center">
-                      <div class="flex item-center justify-center">
-                        <div className="flex gap-2 items-center border-2 px-4 py-1 rounded-lg cursor-pointer"
-                          onClick={() => setShowModal(true)}
-                        >
-                          <GetAppIcon />
-                          <span>ielts_9.0.pdf</span>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="py-3 px-6 text-center">
-                      <div className="flex item-center justify-center gap-2">
-                        <DoneIcon sx={{ color: green[800] }} />
-                        <span className="font-medium">Approved</span>
-                      </div>
-                    </td>
-                </tr> */}
               </tbody>
             </table>
           </div>

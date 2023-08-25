@@ -35,7 +35,7 @@ const items = [
 const Header = () => {
   return (
     <div className='flex items-center gap-11 py-5 px-12 m-auto shadow-x'>
-      <div className="font-bold text-3xl pr-6">ProofGuard</div>
+      <div className="font-bold text-3xl pr-6">DocChain</div>
       <div className="border-[1.5px] border-blue-500 rounded-xl p-1">
         <MenuIcon sx={{ color: blue[500] }}/>
       </div>
