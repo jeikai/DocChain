@@ -7,26 +7,40 @@ import PrivacyTipOutlinedIcon from '@mui/icons-material/PrivacyTipOutlined'
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined'
 import MemoryOutlinedIcon from '@mui/icons-material/MemoryOutlined'
 import AttachMoneyOutlinedIcon from '@mui/icons-material/AttachMoneyOutlined'
+import SearchRoundedIcon from '@mui/icons-material/SearchRounded'
+import { ConnectWallet, useAddress, useLogin } from '@thirdweb-dev/react'
 const Landing = () => {
   return (
     <Fragment>
-        <header className='bg-white'>
+        <header className='bg-b2'>
           <div className="max-w-screen-xl py-3 mx-auto flex justify-between items-center">
-            <div className="logo text-2xl font-bold">ProofGuard</div>
-            <ul className='flex text-base gap-12'>
-                <li><a href="">Product</a></li>
-                <li><a href="">Pricing</a></li>
-                <li><a href="">Company</a></li>
-                <li><a href="">Resources</a></li>
-                <li><a href="">Contact</a></li>
-            </ul>
+            <div className='flex gap-20 items-center'>
+              <div className="logo text-2xl font-bold">ProofGuard</div>
+              <ul className='flex text-base gap-12'>
+                  <li><a href="">Product</a></li>
+                  <li><a href="">Pricing</a></li>
+                  <li><a href="">Company</a></li>
+                  <li><a href="">Resources</a></li>
+                  <li><a href="">Contact</a></li>
+              </ul>
+              <div>
+                <form action="" className='border-[1px] rounded-sm px-2 py-1 relative'>
+                  <input type="text" placeholder='Input your public key' className=' outline-none rounded-sm bg-transparent' />
+                  <button className='absolute top-1 right-0 flex items-center justify-center'>
+                    <SearchRoundedIcon />
+                  </button>
+                </form>
+              </div>
+            </div>
             <div className='flex gap-5 items-center text-base'>
-                <span>Login</span>
-                <button className='bg-pink font-bold text-white p-2 rounded-2xl'>Get Started</button>
+              <ConnectWallet
+                theme="dark"
+                btnTitle="Connect Wallet"
+              />
             </div>
           </div>
         </header>
-        <section>
+        <section className='bg-b2'>
           <div className="max-w-screen-xl mx-auto py-24 flex gap-12">
             <div className='flex-1 text-white'>
               <h1 className='text-4xl font-bold leading-10 tracking-wider'>
@@ -73,10 +87,10 @@ const Landing = () => {
             </li>
           </ul>
         </section>
-        <section>
-          <div className="container max-w-screen-xl mt-24 m-auto">
+        <section className='bg-b2'>
+          <div className="container max-w-screen-xl pt-24 m-auto">
             <h2 className='text-white text-center font-bold text-4xl'>See what our amazing features <br /> can do for you.</h2>
-            <div className='my-12 flex items-center justify-center'>
+            <div className='py-12 flex items-center justify-center'>
               <ul className='flex gap-12'>
                 <li className='text-white text-center'>
                   <div><RestoreIcon sx={{ color: pink[500], fontSize: 50 }} /></div>
@@ -102,8 +116,8 @@ const Landing = () => {
             </div>
           </div>
         </section>
-        <section>
-          <div className="container max-w-screen-xl mt-24 m-auto flex gap-4">
+        <section className='bg-b2'>
+          <div className="container max-w-screen-xl pt-24 m-auto flex gap-4">
             <div className='flex-1'>
               <h2 className='text-white font-semibold text-4xl leading-normal'>Upload your documentations <br />
                   anytime, anywhere and get <br />
@@ -127,8 +141,8 @@ const Landing = () => {
             </div>
           </div>
         </section>
-        <section>
-          <div className="container max-w-screen-xl mt-24 m-auto flex gap-4">
+        <section className='bg-b2'>
+          <div className="container max-w-screen-xl pt-24 m-auto flex gap-4">
           <div className='flex-1'>
               <div className='w-[540px] h-[371px] mr-auto relative'>
                 <img className='w-full h-full' src={ImageHeader4} alt="" />
@@ -151,12 +165,12 @@ const Landing = () => {
             </div>
           </div>
         </section>
-        <section>
-          <div className="container max-w-screen-xl mt-24 m-auto">
+        <section className='bg-b2'>
+          <div className="container max-w-screen-xl pt-24 m-auto">
             <h2 className='text-white text-center font-bold text-4xl'>
             Select the plan that best <br /> meets your needs.
             </h2>
-            <div className='my-12 flex gap-24 items-center justify-center'>
+            <div className='my-12 flex gap-24 items-center justify-center text-black'>
               <div className='w-[400px] rounded-lg py-12 bg-white text-center shadow-custom'>
                 <h4 className='font-bold text-base mb-4'>Standard</h4>
                 <p className='text-gray-medium text-xs mb-8'>For individual users</p>
@@ -208,9 +222,9 @@ const Landing = () => {
                 <div className='text-center my-3 text-gray-dark text-sm'>10% saved</div>
                 <div className='h-[1px] w-[80%] bg-b2 m-auto my-8'></div>
                 <h5 className='w-[60%] text-left m-auto mb-4 text-xl font-semibold'>This plan includes:</h5>
-                <ul className='w-[60%] m-auto'>
+                <ul className='w-[65%] m-auto'>
                   <li className='flex items-center gap-2 text-base font-semibold mb-2'><CheckIcon sx={{ color: pink[500] }} /> 15 GB storage</li>
-                  <li className='flex items-center gap-2 text-base font-semibold mb-2'><CheckIcon sx={{ color: pink[500] }} /> 200,000 requests per month</li>
+                  <li className='flex items-center gap-2 text-base font-semibold mb-2'><CheckIcon sx={{ color: pink[500] }} /> 100000 requests per month</li>
                   <li className='flex items-center gap-2 text-base font-semibold mb-2'><CheckIcon sx={{ color: pink[500] }} /> Verify automation</li>
                 </ul>
                 <div className='px-8 mt-12'>
@@ -221,8 +235,8 @@ const Landing = () => {
             <div className='text-center text-white'>No credit card required, start for free, pick a plan later. Cancel at any time</div>
           </div>
         </section>
-        <section>
-          <div className="container max-w-screen-xl mt-24 m-auto">
+        <section className='bg-b2 pb-12'>
+          <div className="container max-w-screen-xl pt-24 m-auto">
             <h2 className='text-white text-center font-bold text-4xl'>
             Frequently asked questions
             </h2>
@@ -241,7 +255,7 @@ const Landing = () => {
             </div>
           </div>
         </section>
-        <section className='bg-b1 py-12 my-24'>
+        <section className='bg-b1 py-36'>
           <div className="container max-w-screen-xl mt-24 m-auto">
             <h2 className='text-white text-center font-bold text-4xl mb-12'>Get started with our platform <br />
                 now and supercharge your <br />
@@ -253,8 +267,8 @@ const Landing = () => {
             </div>
           </div>
         </section>
-        <section>
-          <div className="container max-w-screen-xl my-24 m-auto">
+        <section className='bg-b2'>
+          <div className="container max-w-screen-xl py-24 m-auto">
             <h2 className='text-white text-center font-bold text-4xl mb-12'>
               Fun Bug
             </h2>

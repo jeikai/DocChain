@@ -19,3 +19,11 @@ body {
 .shadow-custom {
   box-shadow: #C23893 8px 8px 2.6px;
 }
+.collapse-title {
+  padding: 0rem;
+  padding-right: 0rem;
+}
+
+.text-white {
+  color: white !important;
+}
