@@ -14,11 +14,24 @@ exports.generateKeyPair = async (req, res) => {
     })
 
     res.send({publicKey: publicKey.toString('base64'), privateKey: privateKey.toString('base64')})
-
 }
 
 exports.sign = async (req, res) => {
-    let { data, privateKey } = req.body
+    let { data } = req.body
+    let {publicKey, privateKey} = crypto.generateKeyPairSync('rsa', {
+        modulusLength: 700, 
+        publicKeyEncoding: {
+            type: 'spki',
+            format: 'der'
+        }, 
+        privateKeyEncoding: {
+            type: 'pkcs8',
+            format: 'der'
+        }
+    })
+
+    publicKey = publicKey.toString('base64')
+    privateKey = privateKey.toString('base64')
 
     privateKey = crypto.createPrivateKey({
         key: Buffer.from(privateKey, 'base64'),
@@ -31,12 +44,11 @@ exports.sign = async (req, res) => {
     sign.end()
     const signature = sign.sign(privateKey).toString('base64')
 
-    res.send({data, signature})
+    res.send({publicKey: publicKey, signature: signature})
 }
 
 exports.verify = async (req, res) => {
     let {data, publicKey, signature} = req.body
-
     publicKey = crypto.createPublicKey({
         key: Buffer.from(publicKey, 'base64'),
         type: 'spki',

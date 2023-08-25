@@ -136,7 +136,7 @@ const Transaction = () => {
       }
   return (
     <Fragment>
-      <div className='dashboard-link px-8 my-4 flex item-center'>
+      <div className='dashboard-link px-8 my-4 flex item-center '>
         <HomeOutlinedIcon sx={{ color: grey[500] }}/>
         <ChevronRightOutlinedIcon sx={{ color: grey[500] }}/>
         <span>Performance Report</span>
@@ -152,7 +152,7 @@ const Transaction = () => {
           <div className="search flex gap-2 items-center border-[1.5px] border-slate-600 rounded-3xl p-2">
             <SearchIcon />
             <input
-              className="w-[370px] outline-none"
+              className="w-[370px] bg-[#121212] outline-none"
               type="text"
               placeholder="Search by Name, Manager & Phone No."
             />
