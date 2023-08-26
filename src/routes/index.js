@@ -3,6 +3,8 @@ import AdminDashboard from "../components/AdminDashboard";
 import AdminVerified from "../components/AdminVerified";
 import FormInfo from "../components/FormInfo";
 import { Landing } from "../pages";
+
+
 const routes = [
     {
         path: '/user', 
