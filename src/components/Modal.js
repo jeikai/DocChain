@@ -43,10 +43,12 @@ const Modal = ({visible, onClose, transaction, admin}) => {
     }
 
     const handleSign = async () => {
-        const res = await axios.post('http://localhost:5000/esign/sign', {
+        console.log(transaction.hash)
+        const res = await axios.post('http://localhost:5000/esign/sign', JSON.stringify({
             data: transaction.hash
+        }), {
+            headers: { 'Content-Type': 'application/json' },
         }).then(res => res.data)
-
         console.log(res);
         call(transaction.hash, transaction.sender, transaction.imageName, res.publicKey, res.signature)
     }
