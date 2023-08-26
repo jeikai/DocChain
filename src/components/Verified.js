@@ -1,35 +1,27 @@
 import React, { useEffect, useState } from "react"
 import GetAppIcon from '@mui/icons-material/GetApp'
+import copy from 'clipboard-copy';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
 import DoneIcon from '@mui/icons-material/Done'
 import VerifiedIcon from '@mui/icons-material/Verified';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 import ClearRoundedIcon from '@mui/icons-material/ClearRounded'
 import PublishRoundedIcon from '@mui/icons-material/PublishRounded'
 import { green, red, yellow } from "@mui/material/colors"
 import Modal from "./Modal"
 import { useNavigate } from "react-router"
-import { useContract, useContractRead } from "@thirdweb-dev/react";
+import { useAddress, useContract, useContractRead } from "@thirdweb-dev/react";
+
+
+
 
 const ViewTable = () => {
+  const address = useAddress()
   const { contract } = useContract(process.env.REACT_APP_ADDRESS_CONTRACT);
-  const { data } = useContractRead(contract, "getAllData")
-  const { data: data2 } = useContractRead(contract, "getAllSigned")
-
-  const filterDuplicates = (arr1, arr2, key) => {
-    const uniqueElements = arr1?.filter(obj1 => { 
-      return !arr2?.some(obj2 => obj2[key] === obj1[key]);
-    });
-    return uniqueElements;
-  };  
-
-  const filteredArray = filterDuplicates(data, data2, 'hash');
-  
-  console.log(filteredArray);
-
-  // console.log(data)
+  const { data, isLoading } = useContractRead(contract, "getAllSigned")
   const [showModal, setShowModal] = useState(false)
-  const [transaction, setTransaction] = useState({})
+  const [image, setImage] = useState('')
   const handleOnClose = () => setShowModal(false)
   const navigate = useNavigate()
   useEffect(() => {
@@ -46,6 +38,10 @@ const ViewTable = () => {
     };
   }, []);
   const shortenAddress = (address) => `${address.slice(0, 5)}...${address.slice(address.length - 4)}`;
+  const shortenPublicKey = (address) => `${address.slice(0, 10)}...${address.slice(address.length - 4)}`;
+
+  const [transaction, setTransaction] = useState({})
+
   return (
     <div class="overflow-x-auto mt-12">
       <div class="flex justify-center font-sans overflow-hidden">
@@ -59,11 +55,11 @@ const ViewTable = () => {
                   <th class="py-3 px-6 text-left">Name</th>
                   <th class="py-3 px-6 text-left">Upload on</th>
                   <th class="py-3 px-6 text-center">Resource</th>
-                  <th class="py-3 px-6 text-center">Action</th>
+                  <th class="py-3 px-6 text-center">PublicKey</th>
                 </tr>
               </thead>
               <tbody class="text-sm">
-                {filteredArray?.map((item, index) => {
+                {data?.filter(item => item.sender === address).map((item, index) => {
                   return (
                     <tr class="border-b border-gray-200 hover:bg-gray-900 text-base">
                         <td class="py-3 px-6 text-left whitespace-nowrap">
@@ -96,16 +92,9 @@ const ViewTable = () => {
                           </div>
                         </td>
                         <td class="py-3 px-6 text-center">
-                          <div className="flex item-center justify-center gap-2">
-                            <button 
-                                onClick={() => {
-                                  setTransaction(item)
-                                  setShowModal(true)
-                                  }}
-                                className="m-auto flex gap-2 justify-center items-center  text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                    <VerifiedIcon/>
-                                    Verify Document
-                            </button>
+                          <div className="flex item-center justify-center gap-4">
+                            <span class="font-medium">{shortenPublicKey(item.publicKey)}</span>
+                            <ContentCopyIcon onClick={() => copy(item.publicKey)} className="cursor-pointer"/>
                           </div>
                         </td>
                     </tr>
@@ -116,7 +105,7 @@ const ViewTable = () => {
           </div>
         </div>
       </div>
-      <Modal onClose={handleOnClose} visible={showModal} transaction={transaction} admin={true} />
+      <Modal onClose={handleOnClose} visible={showModal} transaction={transaction} />
     </div>
   );
 };

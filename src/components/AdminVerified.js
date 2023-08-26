@@ -43,7 +43,7 @@ const ViewTable = () => {
       <div class="flex justify-center font-sans overflow-hidden">
         <div class="w-full lg:w-5/6">
           
-          <div class="p-4 rounded my-6 shadow-xl shadow-gray-800">
+          <div class="p-4 rounded my-6 shadow-xl shadow-gray-800 overflow-y-auto h-[500px]">
             <table class="min-w-max w-full table-auto ">
               <thead>
                 <tr class="border-b border-gray-200  uppercase text-sm leading-normal">
@@ -101,7 +101,7 @@ const ViewTable = () => {
           </div>
         </div>
       </div>
-      <Modal onClose={handleOnClose} visible={showModal} transaction={transaction} admin={true} />
+      <Modal onClose={handleOnClose} visible={showModal} transaction={transaction} />
     </div>
   );
 };
