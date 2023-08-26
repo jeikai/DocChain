@@ -15,7 +15,7 @@ const Modal = ({visible, onClose, transaction, admin}) => {
     const call = async (_hash, _sender, _imageName, _publicKey, _signature) => {
       try {
         const data = await storeSignedData({ args: [_hash, _sender, _imageName, _publicKey, _signature] });
-        Swal.fire({
+        Swal.fire({ 
             icon: 'success',
             title: 'Your work has been saved',
             showConfirmButton: false,

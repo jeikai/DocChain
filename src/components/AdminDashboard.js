@@ -11,16 +11,13 @@ import Modal from "./Modal"
 import { useNavigate } from "react-router"
 import { useContract, useContractRead } from "@thirdweb-dev/react";
 
-
-
-
 const ViewTable = () => {
   const { contract } = useContract(process.env.REACT_APP_ADDRESS_CONTRACT);
   const { data } = useContractRead(contract, "getAllData")
   const { data: data2 } = useContractRead(contract, "getAllSigned")
 
   const filterDuplicates = (arr1, arr2, key) => {
-    const uniqueElements = arr1?.filter(obj1 => {
+    const uniqueElements = arr1?.filter(obj1 => { 
       return !arr2?.some(obj2 => obj2[key] === obj1[key]);
     });
     return uniqueElements;

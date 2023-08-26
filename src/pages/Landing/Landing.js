@@ -14,8 +14,8 @@ const Landing = () => {
     <Fragment>
         <header className='bg-b2'>
           <div className="max-w-screen-xl py-3 mx-auto flex justify-between items-center">
-            <div className='flex gap-20 items-center'>
-              <div className="logo text-2xl font-bold">ProofGuard</div>
+            <div className='flex gap-20 items-center text-white'>
+              <div className="logo text-2xl font-bold">DocChain</div>
               <ul className='flex text-base gap-12'>
                   <li><a href="">Product</a></li>
                   <li><a href="">Pricing</a></li>
@@ -23,14 +23,6 @@ const Landing = () => {
                   <li><a href="">Resources</a></li>
                   <li><a href="">Contact</a></li>
               </ul>
-              <div>
-                <form action="" className='border-[1px] rounded-sm px-2 py-1 relative'>
-                  <input type="text" placeholder='Input your public key' className=' outline-none rounded-sm bg-transparent' />
-                  <button className='absolute top-1 right-0 flex items-center justify-center'>
-                    <SearchRoundedIcon />
-                  </button>
-                </form>
-              </div>
             </div>
             <div className='flex gap-5 items-center text-base'>
               <ConnectWallet
@@ -44,17 +36,16 @@ const Landing = () => {
           <div className="max-w-screen-xl mx-auto py-24 flex gap-12">
             <div className='flex-1 text-white'>
               <h1 className='text-4xl font-bold leading-10 tracking-wider'>
-                  Experience the <br />
-                  future of Documents Verification <br />
-                  with ProofGuard
+                  Unveiling the<br />
+                  Future of Document Verification<br />
+                  with DocChain
               </h1>
               <p className='my-8'>
-                An awesome & powerful tools for business, education, healthcare
-                and many more.  
+              A specialized verification tool offering a Seamless, Secure, and Efficient solution for individuals and businesses  
               </p>
               <div className='h-[1px] bg-white'></div>
               <div className="search flex items-center my-8 px-4 bg-white rounded-full w-[493px] h-[68px]">
-                <input className='flex-1 outline-none text-b1 px-2' type="text" placeholder='Enter your email to get notification' />
+                <input className='flex-1 outline-none bg-transparent text-b1 px-2' type="text" placeholder='Enter public key' />
                 <button className='bg-b1 px-3 py-2 rounded-3xl'>Get Started</button>
               </div>
               <ul className='flex gap-6'>
@@ -173,11 +164,11 @@ const Landing = () => {
             <div className='my-12 flex gap-24 items-center justify-center text-black'>
               <div className='w-[400px] rounded-lg py-12 bg-white text-center shadow-custom'>
                 <h4 className='font-bold text-base mb-4'>Standard</h4>
-                <p className='text-gray-medium text-xs mb-8'>For individual users</p>
+                <p className='text-gray-medium text-xs mb-8'></p>
                 <div className='flex items-center justify-center'>
                   <span className='font-bold text-4xl mr-3 relative'>
                     <div className='absolute -top-5 -left-3'><AttachMoneyOutlinedIcon sx={{ fontSize: 20 }} /></div>
-                    15
+                    15 /
                   </span>
                   <span className='font-medium text-sm'>Billed <br /> monthly</span>
                 </div>
@@ -185,7 +176,7 @@ const Landing = () => {
                 <div className='relative flex items-center justify-center'>
                   <span className='relative font-bold text-4xl mr-3'>
                     <div className='absolute -top-5 -left-3'><AttachMoneyOutlinedIcon sx={{ fontSize: 20 }} /></div>
-                    150
+                    150 /
                   </span>
                   <span className='font-medium text-sm'>Billed <br /> yearly</span>
                 </div>
@@ -195,7 +186,7 @@ const Landing = () => {
                 <ul className='w-[60%] m-auto'>
                   <li className='flex items-center gap-2 text-base font-semibold mb-2'><CheckIcon sx={{ color: pink[500] }} /> 5 GB storage</li>
                   <li className='flex items-center gap-2 text-base font-semibold mb-2'><CheckIcon sx={{ color: pink[500] }} /> 50,000 requests per month</li>
-                  <li className='flex items-center gap-2 text-base font-semibold mb-2'><CheckIcon sx={{ color: pink[500] }} /> Verify automation</li>
+                  <li className='flex items-center gap-2 text-base font-semibold mb-2'><CheckIcon sx={{ color: pink[500] }} /> Two-factor Verification</li>
                 </ul>
                 <div className='px-8 mt-12'>
                   <button className='w-full bg-pink py-2 text-white font-semibold rounded-lg'>Get Started</button>
@@ -203,11 +194,11 @@ const Landing = () => {
               </div>
               <div className='w-[400px] rounded-lg py-12 bg-white text-center shadow-custom'>
                 <h4 className='font-bold text-base mb-4'>Professional</h4>
-                <p className='text-gray-medium text-xs mb-8'>For companies</p>
+                <p className='text-gray-medium text-xs mb-8'></p>
                 <div className='flex items-center justify-center'>
                   <span className='font-bold text-4xl mr-3 relative'>
                     <div className='absolute -top-5 -left-3'><AttachMoneyOutlinedIcon sx={{ fontSize: 20 }} /></div>
-                    25
+                    25 /
                   </span>
                   <span className='font-medium text-sm'>Billed <br /> monthly</span>
                 </div>
@@ -215,7 +206,7 @@ const Landing = () => {
                 <div className='relative flex items-center justify-center'>
                   <span className='relative font-bold text-4xl mr-3'>
                     <div className='absolute -top-5 -left-3'><AttachMoneyOutlinedIcon sx={{ fontSize: 20 }} /></div>
-                    270
+                    270 /
                   </span>
                   <span className='font-medium text-sm'>Billed <br /> yearly</span>
                 </div>
@@ -224,8 +215,8 @@ const Landing = () => {
                 <h5 className='w-[60%] text-left m-auto mb-4 text-xl font-semibold'>This plan includes:</h5>
                 <ul className='w-[65%] m-auto'>
                   <li className='flex items-center gap-2 text-base font-semibold mb-2'><CheckIcon sx={{ color: pink[500] }} /> 15 GB storage</li>
-                  <li className='flex items-center gap-2 text-base font-semibold mb-2'><CheckIcon sx={{ color: pink[500] }} /> 100000 requests per month</li>
-                  <li className='flex items-center gap-2 text-base font-semibold mb-2'><CheckIcon sx={{ color: pink[500] }} /> Verify automation</li>
+                  <li className='flex items-center gap-2 text-base font-semibold mb-2'><CheckIcon sx={{ color: pink[500] }} /> 100,000 requests per month</li>
+                  <li className='flex items-center gap-2 text-base font-semibold mb-2'><CheckIcon sx={{ color: pink[500] }} />Automatic Verification</li>
                 </ul>
                 <div className='px-8 mt-12'>
                   <button className='w-full bg-pink py-2 text-white font-semibold rounded-lg'>Get Started</button>
@@ -283,29 +274,29 @@ const Landing = () => {
               <div className='w-[350px] h-[500px] relative rounded-2xl overflow-hidden'>
                 <img className='w-full h-full brightness-75' src={Hai} alt="" />
                 <div className='absolute z-10 bottom-0 left-0 px-12 pb-6 w-full'>
-                  <p className='font-semibold text-2xl text-white'>Phúc Trần</p>
-                  <p className='text-white'>Backend Developer</p>
+                  <p className='font-semibold text-2xl text-white'>Bùi Đức Hải</p>
+                  <p className='text-white'>Designer</p>
                 </div>
               </div>
               <div className='w-[350px] h-[500px] relative rounded-2xl overflow-hidden'>
                 <img className='w-full h-full brightness-75' src={Mai} alt="" />
                 <div className='absolute z-10 bottom-0 left-0 px-12 pb-6 w-full'>
-                  <p className='font-semibold text-2xl text-white'>Phúc Trần</p>
-                  <p className='text-white'>Backend Developer</p>
+                  <p className='font-semibold text-2xl text-white'>Mai Võ</p>
+                  <p className='text-white'>Business Analyst</p>
                 </div>
               </div>
               <div className='w-[350px] h-[500px] relative rounded-2xl overflow-hidden'>
-                <img className='w-full h-full brightness-75' src={Cuong} alt="" />
+                <img className='w-full h-full brightness-75 object-cover' src={Cuong} alt="" />
                 <div className='absolute z-10 bottom-0 left-0 px-12 pb-6 w-full'>
-                  <p className='font-semibold text-2xl text-white'>Phúc Trần</p>
-                  <p className='text-white'>Backend Developer</p>
+                  <p className='font-semibold text-2xl text-white'>Đặng Cường</p>
+                  <p className='text-white'>Full-Stack</p>
                 </div>
               </div>
               <div className='w-[350px] h-[500px] relative rounded-2xl overflow-hidden'>
                 <img className='w-full h-full brightness-75' src={Duc} alt="" />
                 <div className='absolute z-10 bottom-0 left-0 px-12 pb-6 w-full'>
-                  <p className='font-semibold text-2xl text-white'>Phúc Trần</p>
-                  <p className='text-white'>Backend Developer</p>
+                  <p className='font-semibold text-2xl text-white'>Minh Đức</p>
+                  <p className='text-white'>Full-Stack</p>
                 </div>
               </div>
             </div>

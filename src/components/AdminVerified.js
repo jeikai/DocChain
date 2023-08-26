@@ -13,9 +13,6 @@ import Modal from "./Modal"
 import { useNavigate } from "react-router"
 import { useContract, useContractRead } from "@thirdweb-dev/react";
 
-
-
-
 const ViewTable = () => {
   const { contract } = useContract(process.env.REACT_APP_ADDRESS_CONTRACT);
   const { data, isLoading } = useContractRead(contract, "getAllSigned")
@@ -23,7 +20,7 @@ const ViewTable = () => {
   const [image, setImage] = useState('')
   const handleOnClose = () => setShowModal(false)
   const navigate = useNavigate()
-  useEffect(() => {
+  useEffect(() => { 
     const handleKeyDown = (event) => {
       if (event.key === "Escape" || event.keyCode === 27) {
         handleOnClose()
@@ -38,10 +35,6 @@ const ViewTable = () => {
   }, []);
   const shortenAddress = (address) => `${address.slice(0, 5)}...${address.slice(address.length - 4)}`;
   const shortenPublicKey = (address) => `${address.slice(0, 10)}...${address.slice(address.length - 4)}`;
-
-
-  
-
 
   return (
     <div class="overflow-x-auto mt-12">
@@ -106,7 +99,7 @@ const ViewTable = () => {
           </div>
         </div>
       </div>
-      <Modal onClose={handleOnClose} visible={showModal} image={image} admin={true} />
+      <Modal visible={showModal} onClose={handleOnClose} transaction={image} admin={true} />
     </div>
   );
 };

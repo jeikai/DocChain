@@ -7,9 +7,13 @@ const DropImageInput = () => {
   const inputFileRef = useRef(null);
   const [blob, setBlob] = useState("");
   const [isDragEnter, setIsDragEnter] = useState(false);
-  const { mutateAsync: upload } = useStorageUpload();
+  const { mutateAsync: upload } = useStorageUpload({
+    rewriteFileNames: {
+      fileStartNumber: 1,
+    },
+  });
   const [img, setImg] = useState('')
-  
+
   const address = useAddress();
   const { contract, isLoading } = useContract(process.env.REACT_APP_ADDRESS_CONTRACT)
   const { mutateAsync: storeImageData } = useContractWrite(contract, "storeImageData")
@@ -20,12 +24,11 @@ const DropImageInput = () => {
       console.info("contract call successs", data);
     } catch (err) {
       console.error("contract call failure", err);
-    } 
+    }
   }
   const handleSubmit = async () => {
     const imageData = new FormData();
     imageData.append("image", file);
-    console.log(imageData)
     try {
       // gọi api check AI
       const response = await axios.post("http://localhost:5000/ggVision/verify", imageData, {
@@ -33,12 +36,23 @@ const DropImageInput = () => {
           "Content-Type": "multipart/form-data",
         }
       });
-      const uploadUrl = await upload({
-        data: [file],
-        options: { uploadWithGatewayUrl: true, uploadWithoutDirectory: true },
-      });
-      call(uploadUrl[0], file.name)
-      console.log(response.data);
+      console.log(response)
+      //gọi api compare
+      if (response.data.status) {
+        const verify = await axios.post("http://localhost:5000/verify/check", response.data.response, {
+          headers: {
+            "Content-Type": "application/json",
+          }
+        })
+        console.log(verify.data)
+        if (verify.data.status) {
+          const uploadUrl = await upload({
+            data: [file],
+            options: { uploadWithGatewayUrl: true, uploadWithoutDirectory: true },
+          });
+          call(uploadUrl[0], file.name)
+        }
+      }
     } catch (error) {
       console.error("Error submitting image:", error);
     }

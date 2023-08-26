@@ -104,7 +104,7 @@ const ViewTable = () => {
           </div>
         </div>
       </div>
-      <Modal onClose={handleOnClose} visible={showModal} image={image} />
+      <Modal onClose={handleOnClose} visible={showModal} transaction={image} />
     </div>
   );
 };

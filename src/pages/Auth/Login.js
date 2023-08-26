@@ -5,7 +5,7 @@ const Login = () => {
     <Fragment>
       <header className="bg-white">
         <div className="max-w-screen-xl py-3 mx-auto flex justify-between items-center">
-          <div className="logo text-2xl font-bold">ProofGuard</div>
+          <div className="logo text-2xl font-bold">DocChain</div>
           <ul className="flex text-base gap-12">
             <li>
               <a href="">Product</a>
@@ -34,7 +34,7 @@ const Login = () => {
       <section className="h-[80vh] flex items-center justify-center">
         <div className="flex items-center text-white justify-between w-[70%]">
             <div className="relative">
-                <h2 className="text-6xl font-semibold mb-6">Sign In to <br /> ProofGuard</h2>
+                <h2 className="text-6xl font-semibold mb-6">Sign In to <br />DocChain</h2>
                 <p>Don’t have an account? <a className="text-purple" href="">Register here!</a></p>
                 <img className="absolute scale-150 top-1/4 left-1/3 -z-20 rounded-full" src={LayerBluer} alt="" />
                 <img className="absolute scale-[2] -top-3/4 left-0 -z-10 rounded-full" src={LayerBluer2} alt="" />
