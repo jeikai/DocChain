@@ -36,6 +36,8 @@ const ViewTable = () => {
   const shortenAddress = (address) => `${address.slice(0, 5)}...${address.slice(address.length - 4)}`;
   const shortenPublicKey = (address) => `${address.slice(0, 10)}...${address.slice(address.length - 4)}`;
 
+  const [transaction, setTransaction] = useState({})
+  
   return (
     <div class="overflow-x-auto mt-12">
       <div class="flex justify-center font-sans overflow-hidden">
@@ -76,7 +78,7 @@ const ViewTable = () => {
                           <div class="flex item-center justify-center">
                             <div className="flex gap-2 items-center border-2 px-4 py-1 rounded-lg cursor-pointer"
                               onClick={() => {
-                                setImage(item.hash)
+                                setTransaction(item)
                                 setShowModal(true)
                               }}
                             >
@@ -99,7 +101,7 @@ const ViewTable = () => {
           </div>
         </div>
       </div>
-      <Modal visible={showModal} onClose={handleOnClose} transaction={image} admin={true} />
+      <Modal onClose={handleOnClose} visible={showModal} transaction={transaction} admin={true} />
     </div>
   );
 };
