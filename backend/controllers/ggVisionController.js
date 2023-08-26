@@ -58,9 +58,9 @@ exports.detect = async (req, res) => {
         let newString = removeNewlines(text.fullTextAnnotation.text);
 
         const promises = [
-            ExtractValue(newString, "Centre Number", RegExp(`[a-zA-Z]{${2}}\\d{${3}}`)),
+            ExtractValue(newString, "Centre", RegExp(`[a-zA-Z]{${2}}\\d{${3}}`)),
             ExtractValue(newString, "Candidate Number", RegExp(`\\d{6}`)),
-            ExtractValue(newString, "Date", RegExp(`\\d{2}\\/[a-zA-Z]{3}\\/\\d{4}`)),
+            ExtractValue(newString, "date", RegExp(`\\d{2}\\/[a-zA-Z]{3}\\/\\d{4}`)),
             ExtractValue(newString, "Birth", RegExp(`\\d{2}\\/\\d{2}\\/\\d{4}`)),
             ExtractValue(newString, "CEFR", RegExp(`[a-zA-Z]{1}\\d{1}`)),
             ExtractValue(newString, "Listening", RegExp(`\\d{1}\\.\\d{1}`)),
@@ -69,9 +69,9 @@ exports.detect = async (req, res) => {
             ExtractValue(newString, "Speaking", RegExp(`\\d{1}\\.\\d{1}`)),
             ExtractValue(newString, "Overall", RegExp(`\\d{1}\\.\\d{1}`)),
             ExtractValue(newString, "Date", RegExp(`\\d{2}\\/\\d{2}\\/\\d{4}`)),
-            ExtractValue(newString, "Candidate ID", RegExp(`[A-Z]*\\d{6,12}`)),
+            ExtractValue(newString, "Candidate", RegExp(`\\d{12}`)),
             ExtractValue(newString, "Sex", RegExp(`[MF]`)),
-            ExtractValue(newString, "Report Form", RegExp(`\\d{2}\\s?[A-Z]{2}\\d{6}[A-Z]+\\s?\\d{3}[A-Z]{1}`))
+            ExtractValue(newString, "Report", RegExp(`\\d{2}\\s?[A-Z]{2}\\d{6}[A-Z]+\\s?\\d{3}[A-Z]{1}`))
         ];
         const [
             centreNumber,

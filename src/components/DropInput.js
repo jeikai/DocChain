@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import cloud from "../assets/cloud.png";
-import {toast} from 'react-toastify';
+import { toast } from 'react-toastify';
 import { useAddress, useContract, useContractRead, useContractWrite, useStorageUpload } from "@thirdweb-dev/react";
 import { async } from "q";
 import Swal from "sweetalert2";
-
+import axios from "axios";
 const DropImageInput = () => {
   const [file, setFile] = useState();
   const inputFileRef = useRef(null);
@@ -61,8 +61,28 @@ const DropImageInput = () => {
             data: [file],
             options: { uploadWithGatewayUrl: true, uploadWithoutDirectory: true },
           });
-          call(uploadUrl[0], file.name)
-          toast.success("Xác thực thành công");
+          console.log(uploadUrl)
+          let flag = false
+
+          data?.some((obj) => {
+            return Object.values(obj).some((value) => {
+              if (value === uploadUrl[0]) {
+                flag = true; // Cập nhật biến cờ thành true
+              }
+            });
+          });
+          console.log(flag)
+          if (!flag) {
+            call(uploadUrl[0], file.name)
+            toast.success("Xác thực thành công");
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Something went wrong!',
+              timer: 1500
+            })
+          }
         } else {
           toast.error("Dữ liệu không khớp")
         }
@@ -71,31 +91,6 @@ const DropImageInput = () => {
       }
     } catch (error) {
       console.error("Error submitting image:", error);
-    const uploadUrl = await upload({
-      data: [file],
-      options: { uploadWithGatewayUrl: true, uploadWithoutDirectory: true },
-    });
-    console.log(uploadUrl)
-    let flag = false
-
-    data?.some((obj) => {
-      return Object.values(obj).some((value) => {
-        if (value === uploadUrl[0]) {
-          flag = true; // Cập nhật biến cờ thành true
-          // return true; // Trả về true và thoát khỏi vòng lặp
-        }
-      });
-    });
-    console.log(flag)
-    if(!flag){
-      call(uploadUrl[0], file.name)
-    }else {
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Something went wrong!',
-        timer: 1500
-      })
     }
   }
   useEffect(() => {
@@ -185,5 +180,6 @@ const DropImageInput = () => {
     </>
   );
 };
+
 
 export default DropImageInput;

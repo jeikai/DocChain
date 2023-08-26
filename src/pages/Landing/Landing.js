@@ -35,10 +35,10 @@ const Landing = () => {
         <section className='bg-b2'>
           <div className="max-w-screen-xl mx-auto py-24 flex gap-12">
             <div className='flex-1 text-white'>
-              <h1 className='text-4xl font-bold leading-10 tracking-wider'>
-                  Unveiling the<br />
-                  Future of Document Verification<br />
-                  with DocChain
+              <h1 className='text-3xl font-bold leading-10 tracking-wider'>
+                  Revolutionizing Document Verification<br />
+                  with DocChain:<br />
+                  Secure, Swift, and Transparent
               </h1>
               <p className='my-8'>
               A specialized verification tool offering a Seamless, Secure, and Efficient solution for individuals and businesses  
@@ -186,7 +186,7 @@ const Landing = () => {
                 <ul className='w-[60%] m-auto'>
                   <li className='flex items-center gap-2 text-base font-semibold mb-2'><CheckIcon sx={{ color: pink[500] }} /> 5 GB storage</li>
                   <li className='flex items-center gap-2 text-base font-semibold mb-2'><CheckIcon sx={{ color: pink[500] }} /> 50,000 requests per month</li>
-                  <li className='flex items-center gap-2 text-base font-semibold mb-2'><CheckIcon sx={{ color: pink[500] }} /> Two-factor Verification</li>
+                  <li className='flex items-center gap-2 text-base font-semibold mb-2'><CheckIcon sx={{ color: pink[500] }} /> Automatic Verification</li>
                 </ul>
                 <div className='px-8 mt-12'>
                   <button className='w-full bg-pink py-2 text-white font-semibold rounded-lg'>Get Started</button>
@@ -216,7 +216,7 @@ const Landing = () => {
                 <ul className='w-[65%] m-auto'>
                   <li className='flex items-center gap-2 text-base font-semibold mb-2'><CheckIcon sx={{ color: pink[500] }} /> 15 GB storage</li>
                   <li className='flex items-center gap-2 text-base font-semibold mb-2'><CheckIcon sx={{ color: pink[500] }} /> 100,000 requests per month</li>
-                  <li className='flex items-center gap-2 text-base font-semibold mb-2'><CheckIcon sx={{ color: pink[500] }} />Automatic Verification</li>
+                  <li className='flex items-center gap-2 text-base font-semibold mb-2'><CheckIcon sx={{ color: pink[500] }} />Two-factor Verification</li>
                 </ul>
                 <div className='px-8 mt-12'>
                   <button className='w-full bg-pink py-2 text-white font-semibold rounded-lg'>Get Started</button>
