@@ -45,11 +45,12 @@ const Guest = () => {
     if(doc){
       console.log(doc);
       setTransaction(doc)
+      setError(false)
     }else{
       setError(true)
       console.log('Not Found');
     }
-  }, [])
+  }, [isLoading])
 //   const [transaction, setTransaction] = useState({})
   const handleOnClose = () => setShowModal(false)
   return (

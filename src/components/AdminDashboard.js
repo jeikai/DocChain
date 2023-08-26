@@ -31,7 +31,7 @@ const ViewTable = () => {
   const [showModal, setShowModal] = useState(false)
   const [transaction, setTransaction] = useState({})
   const handleOnClose = () => setShowModal(false)
-  const navigate = useNavigate()
+  const navigate = useNavigate() 
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.key === "Escape" || event.keyCode === 27) {

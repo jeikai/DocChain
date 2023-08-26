@@ -55,7 +55,7 @@ const Landing = () => {
               </p>
               <div className='h-[1px] bg-white'></div>
               <div className="search flex items-center my-8 px-4 bg-white rounded-full w-[493px] h-[68px]">
-                <input className='flex-1 outline-none text-b1 px-2' type="text" placeholder='Enter your email to get notification' value={input}
+                <input className='flex-1 outline-none text-b1 bg-transparent px-2' type="text" placeholder='Enter your public key' value={input}
                   onChange={(e) =>setInput(e.target.value)}
                 />
                 <button className='bg-b1 px-3 py-2 rounded-3xl' type='button' onClick={handleSubmit}>Get Started</button>
