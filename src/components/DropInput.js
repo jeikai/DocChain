@@ -1,30 +1,40 @@
 import React, { useEffect, useRef, useState } from "react";
 import cloud from "../assets/cloud.png";
-import { useAddress, useContract, useContractWrite, useStorageUpload } from "@thirdweb-dev/react";
+import { useAddress, useContract, useContractRead, useContractWrite, useStorageUpload } from "@thirdweb-dev/react";
 import { async } from "q";
+import Swal from "sweetalert2";
 
 const DropImageInput = () => {
   const [file, setFile] = useState();
   const inputFileRef = useRef(null);
   const [blob, setBlob] = useState("");
   const [isDragEnter, setIsDragEnter] = useState(false);
-  const { mutateAsync: upload } = useStorageUpload({
-    rewriteFileNames: {
-      fileStartNumber: 1,
-    },
-  });
+  const { mutateAsync: upload } = useStorageUpload();
   const [img, setImg] = useState('')
   
   const address = useAddress();
   const { contract, isLoading } = useContract(process.env.REACT_APP_ADDRESS_CONTRACT)
+  const { data } = useContractRead(contract, "getAllData")
   const { mutateAsync: storeImageData } = useContractWrite(contract, "storeImageData")
 
   const call = async (_url, _fileName) => {
     try {
       const data = await storeImageData({ args: [_url, _fileName] });
       console.info("contract call successs", data);
+      Swal.fire({
+        icon: 'success',
+        title: 'Your work has been saved',
+        showConfirmButton: false,
+        timer: 1500
+      })
     } catch (err) {
       console.error("contract call failure", err);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!',
+        timer: 1500
+      })
     }
   }
 
@@ -33,9 +43,28 @@ const DropImageInput = () => {
       data: [file],
       options: { uploadWithGatewayUrl: true, uploadWithoutDirectory: true },
     });
-    // console.log(uploadUrl[0], file.name)
-    // setImg(uploadUrl[0])
-    call(uploadUrl[0], file.name)
+    console.log(uploadUrl)
+    let flag = false
+
+    data?.some((obj) => {
+      return Object.values(obj).some((value) => {
+        if (value === uploadUrl[0]) {
+          flag = true; // Cập nhật biến cờ thành true
+          // return true; // Trả về true và thoát khỏi vòng lặp
+        }
+      });
+    });
+    console.log(flag)
+    if(!flag){
+      call(uploadUrl[0], file.name)
+    }else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!',
+        timer: 1500
+      })
+    }
   }
   useEffect(() => {
     if (file) {

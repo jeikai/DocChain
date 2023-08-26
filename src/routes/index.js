@@ -1,4 +1,4 @@
-import { DropImageInput, Transaction, ViewTable} from "../components";
+import { DropImageInput, Transaction, Verified, ViewTable} from "../components";
 import AdminDashboard from "../components/AdminDashboard";
 import AdminVerified from "../components/AdminVerified";
 import FormInfo from "../components/FormInfo";
@@ -13,7 +13,7 @@ const routes = [
     },
     {
         path: '/verified', 
-        component: ViewTable, 
+        component: Verified, 
         title: 'View Table',
         layout: 'view',
         permission: 'admin'

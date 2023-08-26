@@ -11,12 +11,13 @@ import PublishRoundedIcon from '@mui/icons-material/PublishRounded'
 import { green, red, yellow } from "@mui/material/colors"
 import Modal from "./Modal"
 import { useNavigate } from "react-router"
-import { useContract, useContractRead } from "@thirdweb-dev/react";
+import { useAddress, useContract, useContractRead } from "@thirdweb-dev/react";
 
 
 
 
 const ViewTable = () => {
+  const address = useAddress()
   const { contract } = useContract(process.env.REACT_APP_ADDRESS_CONTRACT);
   const { data, isLoading } = useContractRead(contract, "getAllSigned")
   const [showModal, setShowModal] = useState(false)
@@ -40,8 +41,6 @@ const ViewTable = () => {
   const shortenPublicKey = (address) => `${address.slice(0, 10)}...${address.slice(address.length - 4)}`;
 
   const [transaction, setTransaction] = useState({})
-  
-
 
   return (
     <div class="overflow-x-auto mt-12">
@@ -60,7 +59,7 @@ const ViewTable = () => {
                 </tr>
               </thead>
               <tbody class="text-sm">
-                {data?.map((item, index) => {
+                {data?.filter(item => item.sender === address).map((item, index) => {
                   return (
                     <tr class="border-b border-gray-200 hover:bg-gray-900 text-base">
                         <td class="py-3 px-6 text-left whitespace-nowrap">

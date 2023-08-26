@@ -54,7 +54,7 @@ const ViewTable = () => {
       <div class="flex justify-center font-sans overflow-hidden">
         <div class="w-full lg:w-5/6">
           
-          <div class="p-4 rounded my-6 shadow-xl shadow-gray-800">
+          <div class="p-4 rounded my-6 shadow-xl shadow-gray-800 overflow-y-auto h-[500px]">
             <table class="min-w-max w-full table-auto ">
               <thead>
                 <tr class="border-b border-gray-200  uppercase text-sm leading-normal">
@@ -102,7 +102,7 @@ const ViewTable = () => {
                           <div className="flex item-center justify-center gap-2">
                             <button 
                                 onClick={() => {
-
+                                  setTransaction(item)
                                   setShowModal(true)
                                   }}
                                 className="m-auto flex gap-2 justify-center items-center  text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
