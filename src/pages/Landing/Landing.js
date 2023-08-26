@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useContext, useState } from 'react'
 import { ImageHeader, ImageHeader2, ImageHeader3, ImageHeader4, LayerBluer, Phuc, Hai, Mai, Cuong, Duc } from '../../assets'
 import { pink } from '@mui/material/colors'
 import CheckIcon from '@mui/icons-material/Check'
@@ -9,7 +9,17 @@ import MemoryOutlinedIcon from '@mui/icons-material/MemoryOutlined'
 import AttachMoneyOutlinedIcon from '@mui/icons-material/AttachMoneyOutlined'
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded'
 import { ConnectWallet, useAddress, useLogin } from '@thirdweb-dev/react'
+import { PublicKeyContext } from '../../components/PublicKeyContext';
+import { useNavigate } from 'react-router'
 const Landing = () => {
+  const { setPublicKey } = useContext(PublicKeyContext)
+  const [input, setInput] = useState('')
+  const navigate = useNavigate()
+  const handleSubmit = () => {
+    console.log(input)
+    setPublicKey(input)
+    navigate('/view')
+  }
   return (
     <Fragment>
         <header className='bg-b2'>
@@ -54,8 +64,10 @@ const Landing = () => {
               </p>
               <div className='h-[1px] bg-white'></div>
               <div className="search flex items-center my-8 px-4 bg-white rounded-full w-[493px] h-[68px]">
-                <input className='flex-1 outline-none text-b1 px-2' type="text" placeholder='Enter your email to get notification' />
-                <button className='bg-b1 px-3 py-2 rounded-3xl'>Get Started</button>
+                <input className='flex-1 outline-none text-b1 px-2' type="text" placeholder='Enter your email to get notification' value={input}
+                  onChange={(e) =>setInput(e.target.value)}
+                />
+                <button className='bg-b1 px-3 py-2 rounded-3xl' type='button' onClick={handleSubmit}>Get Started</button>
               </div>
               <ul className='flex gap-6'>
                 <li className='flex items-center gap-2'><CheckIcon sx={{ color: pink[500] }} /> Free trial</li>

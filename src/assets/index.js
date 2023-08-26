@@ -13,4 +13,7 @@ import Duc from './Duc.png'
 import google from './google.png'
 import apple from './apple.png'
 import facebook from './facebook.png'
-export {ImageHeader, ImageHeader2, ImageHeader3, ImageHeader4, LayerBluer, LayerBluer2, Phuc, Hai, Mai, Cuong, Duc, google, apple, facebook}
+
+import bg from './bg.png'
+import ielts from './anh_ielts.jpg'
+export {ImageHeader, ImageHeader2, ImageHeader3, ImageHeader4, LayerBluer, LayerBluer2, Phuc, Hai, Mai, Cuong, Duc, google, apple, facebook, bg, ielts}
