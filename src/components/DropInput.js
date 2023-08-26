@@ -17,7 +17,7 @@ const DropImageInput = () => {
   const { contract, isLoading } = useContract(process.env.REACT_APP_ADDRESS_CONTRACT)
   const { data } = useContractRead(contract, "getAllData")
   const { mutateAsync: storeImageData } = useContractWrite(contract, "storeImageData")
-
+  const [loading, setLoading] = useState(false)
   const call = async (_url, _fileName) => {
     try {
       const data = await storeImageData({ args: [_url, _fileName] });
@@ -39,6 +39,7 @@ const DropImageInput = () => {
     }
   }
   const handleSubmit = async () => {
+    setLoading(true)
     const imageData = new FormData();
     imageData.append("image", file);
     try {
@@ -90,8 +91,10 @@ const DropImageInput = () => {
         toast.error("Tài liệu không hợp lệ")
       }
     } catch (error) {
+      
       console.error("Error submitting image:", error);
     }
+    setLoading(false)
   }
   useEffect(() => {
     if (file) {
@@ -175,8 +178,17 @@ const DropImageInput = () => {
           Browse files to upload Or Drop files here...
         </p>
       </div>
-      <button type="button" onClick={handleSubmit}>Submit</button>
-      <img src={img} alt="" />
+      {loading ?
+          <div className="mt-12 flex items-center justify-center w-full">
+            <div className="w-16 h-16 border-l-2 border-t-2 border-l-[#15BFFD] border-t-[#15BFFD] rounded-full p-1 animate-spin delay-75">
+              <div className="w-full h-full border-l-2 border-t-2 border-l-[#9C37FD] border-t-[#9C37FD] rounded-full p-1 animate-spin delay-150">
+                <div className="w-full h-full border-l-2 border-t-2 border-l-[#FF2525] border-t-[#FF2525] rounded-full animate-spin delay-200"></div>   
+              </div>   
+            </div>   
+          </div>
+          :
+          <button className="mt-12 m-auto flex bg-gradient-to-tr from-[#21D4FD] to-[#B721FF] px-12 py-4 text-xl rounded-lg" type="button" onClick={handleSubmit}>Submit</button>
+      }
     </>
   );
 };
