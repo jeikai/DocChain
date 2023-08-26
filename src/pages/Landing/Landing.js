@@ -33,14 +33,7 @@ const Landing = () => {
                   <li><a href="">Resources</a></li>
                   <li><a href="">Contact</a></li>
               </ul>
-              <div>
-                <form action="" className='border-[1px] rounded-sm px-2 py-1 relative'>
-                  <input type="text" placeholder='Input your public key' className=' outline-none rounded-sm bg-transparent' />
-                  <button className='absolute top-1 right-0 flex items-center justify-center'>
-                    <SearchRoundedIcon />
-                  </button>
-                </form>
-              </div>
+              
             </div>
             <div className='flex gap-5 items-center text-base'>
               <ConnectWallet
@@ -64,10 +57,10 @@ const Landing = () => {
               </p>
               <div className='h-[1px] bg-white'></div>
               <div className="search flex items-center my-8 px-4 bg-white rounded-full w-[493px] h-[68px]">
-                <input className='flex-1 outline-none text-b1 px-2' type="text" placeholder='Enter your email to get notification' value={input}
+                <input className='flex-1 outline-none text-b1 px-2 bg-transparent' type="text" placeholder='Enter publicKey to view document' value={input}
                   onChange={(e) =>setInput(e.target.value)}
                 />
-                <button className='bg-b1 px-3 py-2 rounded-3xl' type='button' onClick={handleSubmit}>Get Started</button>
+                <button className='bg-b1 px-3 py-2 rounded-3xl' type='button' onClick={handleSubmit}>View Document</button>
               </div>
               <ul className='flex gap-6'>
                 <li className='flex items-center gap-2'><CheckIcon sx={{ color: pink[500] }} /> Free trial</li>
