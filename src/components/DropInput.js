@@ -180,9 +180,9 @@ const DropImageInput = () => {
       </div>
       {loading ?
           <div className="mt-12 flex items-center justify-center w-full">
-            <div className="w-16 h-16 border-l-2 border-t-2 border-l-[#15BFFD] border-t-[#15BFFD] rounded-full p-1 animate-spin delay-75">
-              <div className="w-full h-full border-l-2 border-t-2 border-l-[#9C37FD] border-t-[#9C37FD] rounded-full p-1 animate-spin delay-150">
-                <div className="w-full h-full border-l-2 border-t-2 border-l-[#FF2525] border-t-[#FF2525] rounded-full animate-spin delay-200"></div>   
+            <div className="w-16 h-16 border-l-2 border-b-2 border-l-[#15BFFD] border-b-[#15BFFD] rounded-full p-1 animate-spin delay-75">
+              <div className="w-full h-full border-t-2 border-r-2 border-t-[#9C37FD] border-r-[#9C37FD] rounded-full p-1 animate-spin delay-150">
+                <div className="w-full h-full border-l-2 border-b-2 border-l-[#FF2525] border-b-[#FF2525] rounded-full animate-spin delay-200"></div>   
               </div>   
             </div>   
           </div>
