@@ -8,7 +8,11 @@ const DropImageInput = () => {
   const inputFileRef = useRef(null);
   const [blob, setBlob] = useState("");
   const [isDragEnter, setIsDragEnter] = useState(false);
-  const { mutateAsync: upload } = useStorageUpload();
+  const { mutateAsync: upload } = useStorageUpload({
+    rewriteFileNames: {
+      fileStartNumber: 1,
+    },
+  });
   const [img, setImg] = useState('')
   
   const address = useAddress();

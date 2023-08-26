@@ -17,6 +17,7 @@ exports.generateKeyPair = async (req, res) => {
 }
 
 exports.sign = async (req, res) => {
+    debugger
     let { data } = req.body
     let {publicKey, privateKey} = crypto.generateKeyPairSync('rsa', {
         modulusLength: 700, 
