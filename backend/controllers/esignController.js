@@ -62,6 +62,6 @@ exports.verify = async (req, res) => {
 
     let result = verify.verify(publicKey, Buffer.from(signature, 'base64'))
 
-    res.send({verify: result})
+    res.send({verify: result}) 
 }
 

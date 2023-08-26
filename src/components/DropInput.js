@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import cloud from "../assets/cloud.png";
 import { useAddress, useContract, useContractWrite, useStorageUpload } from "@thirdweb-dev/react";
 import axios from "axios";
+import {toast} from 'react-toastify';
+
 const DropImageInput = () => {
   const [file, setFile] = useState();
   const inputFileRef = useRef(null);
@@ -44,14 +46,18 @@ const DropImageInput = () => {
             "Content-Type": "application/json",
           }
         })
-        console.log(verify.data)
         if (verify.data.status) {
           const uploadUrl = await upload({
             data: [file],
             options: { uploadWithGatewayUrl: true, uploadWithoutDirectory: true },
           });
           call(uploadUrl[0], file.name)
+          toast.success("Xác thực thành công");
+        } else {
+          toast.error("Dữ liệu không khớp")
         }
+      } else {
+        toast.error("Tài liệu không hợp lệ")
       }
     } catch (error) {
       console.error("Error submitting image:", error);

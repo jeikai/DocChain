@@ -43,7 +43,7 @@ const removeNewlines = (inputString) => {
     return inputString.replace(/\n/g, ' ');
 };
 function removeSpaces(inputString) {
-    if(!inputString) {
+    if (!inputString) {
         return '';
     }
     return inputString.replace(/\s/g, '');
@@ -58,20 +58,20 @@ exports.detect = async (req, res) => {
         let newString = removeNewlines(text.fullTextAnnotation.text);
 
         const promises = [
-            ExtractValue(newString, "Centre Number", RegExp(`[a-zA-Z]{${2}}\\d{${3}}[^a-zA-Z0-9\\s]{${0}}`)),
-            ExtractValue(newString, "Candidate Number", RegExp(`[a-zA-Z]{${0}}\\d{${6}}[^a-zA-Z0-9\\s]{${0}}`)),
+            ExtractValue(newString, "Centre Number", RegExp(`[a-zA-Z]{${2}}\\d{${3}}`)),
+            ExtractValue(newString, "Candidate Number", RegExp(`\\d{6}`)),
             ExtractValue(newString, "Date", RegExp(`\\d{2}\\/[a-zA-Z]{3}\\/\\d{4}`)),
             ExtractValue(newString, "Birth", RegExp(`\\d{2}\\/\\d{2}\\/\\d{4}`)),
-            ExtractValue(newString, "CEFR", RegExp(`[a-zA-Z]{${1}}\\d{${1}}`)),
+            ExtractValue(newString, "CEFR", RegExp(`[a-zA-Z]{1}\\d{1}`)),
             ExtractValue(newString, "Listening", RegExp(`\\d{1}\\.\\d{1}`)),
             ExtractValue(newString, "Reading", RegExp(`\\d{1}\\.\\d{1}`)),
             ExtractValue(newString, "Writing", RegExp(`\\d{1}\\.\\d{1}`)),
             ExtractValue(newString, "Speaking", RegExp(`\\d{1}\\.\\d{1}`)),
             ExtractValue(newString, "Overall", RegExp(`\\d{1}\\.\\d{1}`)),
             ExtractValue(newString, "Date", RegExp(`\\d{2}\\/\\d{2}\\/\\d{4}`)),
-            ExtractValue(newString, "Candidate ID", RegExp(`\\d{12}`)),
+            ExtractValue(newString, "Candidate ID", RegExp(`[A-Z]*\\d{6,12}`)),
             ExtractValue(newString, "Sex", RegExp(`[MF]`)),
-            ExtractValue(newString, "Report Form", RegExp(`\\d{2}\\s?[A-Z]{2}\\d{6}[A-Z]+\\s?\\d{3}[A-Z]{1}`)) 
+            ExtractValue(newString, "Report Form", RegExp(`\\d{2}\\s?[A-Z]{2}\\d{6}[A-Z]+\\s?\\d{3}[A-Z]{1}`))
         ];
         const [
             centreNumber,
@@ -109,7 +109,27 @@ exports.detect = async (req, res) => {
             tiltAngle: face_detail.tiltAngle,
             string_check: newString
         }
-        res.json({ response, status: true });
+        if (
+            response.centreNumber !== null &&
+            response.CandidateNumber !== null &&
+            response.Date_Exam !== null &&
+            response.Birth !== null &&
+            response.CEFR !== null &&
+            response.Listening !== null &&
+            response.Reading !== null &&
+            response.Writing !== null &&
+            response.Speaking !== null &&
+            response.Overall !== null &&
+            response.Date_Sign !== null &&
+            response.CandidateId !== null &&
+            response.ReportFormNumber !== null &&
+            response.Sex !== null
+        ) {
+            res.json({ response, status: true });
+        } else {
+            res.json({ response, status: false });
+        }
+
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: error, status: false });
