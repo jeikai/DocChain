@@ -1,4 +1,4 @@
-import { DropImageInput, Transaction, Verified, ViewTable} from "../components";
+import { DropImageInput, Guest, Transaction, Verified, ViewTable} from "../components";
 import AdminDashboard from "../components/AdminDashboard";
 import AdminVerified from "../components/AdminVerified";
 import FormInfo from "../components/FormInfo";
@@ -59,8 +59,15 @@ const routes = [
         component: Landing, 
         title: 'Docchain',
         layout: 'view',
-        page: 'none'
-    }
+        page: 'none',
+    },
+    { 
+        path: '/view', 
+        component: Guest, 
+        title: 'Docs',
+        layout: 'view',
+        page: 'none',
+    },
 ]
 
 export {routes}
