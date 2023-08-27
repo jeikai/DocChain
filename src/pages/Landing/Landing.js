@@ -20,6 +20,9 @@ const Landing = () => {
     setPublicKey(input)
     navigate('/view')
   }
+  const handleDashboard = () => {
+    navigate('/user')
+  }
   return (
     <Fragment>
         <header className='bg-b2'>
@@ -53,12 +56,13 @@ const Landing = () => {
               <p className='my-8'>
               A specialized verification tool offering a Seamless, Secure, and Efficient solution for individuals and businesses  
               </p>
+              <p className='text-xl cursor-pointer font-bold hover:text-blue-500 transition' onClick={handleDashboard}>Go to dashboard</p>
               <div className='h-[1px] bg-white'></div>
               <div className="search flex items-center my-8 px-4 bg-white rounded-full w-[493px] h-[68px]">
                 <input className='flex-1 outline-none text-b1 bg-transparent px-2' type="text" placeholder='Enter your public key' value={input}
                   onChange={(e) =>setInput(e.target.value)}
                 />
-                <button className='bg-b1 px-3 py-2 rounded-3xl' type='button' onClick={handleSubmit}>Get Started</button>
+                <button className='bg-b1 px-3 py-2 rounded-3xl' type='button' onClick={handleSubmit}>Find</button>
               </div>
               <ul className='flex gap-6'>
                 <li className='flex items-center gap-2'><CheckIcon sx={{ color: pink[500] }} /> Free trial</li>

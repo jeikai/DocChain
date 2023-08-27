@@ -24,7 +24,7 @@ const DropImageInput = () => {
       console.info("contract call successs", data);
       Swal.fire({
         icon: 'success',
-        title: 'Your work has been saved',
+        title: 'Tài liệu đã được xác thực',
         showConfirmButton: false,
         timer: 1500
       })
@@ -40,7 +40,7 @@ const DropImageInput = () => {
   }
   const handleSubmit = async () => {
     const imageData = new FormData();
-    imageData.append("image", file);
+    imageData.append("image", file); 
     try {
       // gọi api check AI
       const response = await axios.post("http://localhost:5000/ggVision/verify", imageData, {
@@ -74,20 +74,29 @@ const DropImageInput = () => {
           console.log(flag)
           if (!flag) {
             call(uploadUrl[0], file.name)
-            toast.success("Xác thực thành công");
           } else {
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
-              text: 'Something went wrong!',
+              text: 'Tài liệu này đã có sẵn!',
               timer: 1500
             })
           }
         } else {
-          toast.error("Dữ liệu không khớp")
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Dữ liệu không chính xác',
+            timer: 1500
+          })
         }
       } else {
-        toast.error("Tài liệu không hợp lệ")
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Vui lòng kiểm tra lại tài liệu của bạn!',
+          timer: 1500
+        })
       }
     } catch (error) {
       console.error("Error submitting image:", error);
