@@ -61,7 +61,7 @@ exports.detect = async (req, res) => {
         if (newString.includes('IELTS')) {
             let [face] = await client.faceDetection(file_path);
             let face_detail = face.faceAnnotations[0];
-
+ 
             const promises = [
                 ExtractValue(newString, "Centre", RegExp(`[a-zA-Z]{${2}}\\d{${3}}`)),
                 ExtractValue(newString, "Candidate Number", RegExp(`\\d{6}`)),

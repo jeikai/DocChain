@@ -186,61 +186,66 @@ const Landing = () => {
             Select the plan that best <br /> meets your needs.
           </h2>
           <div className='my-12 flex gap-24 items-center justify-center text-black'>
-            <div className='w-[400px] rounded-lg py-12 bg-white text-center shadow-custom'>
-              <h4 className='font-bold text-base mb-4'>Standard</h4>
+            <div className='w-[400px] rounded-lg py-12 bg-white  shadow-custom'>
+              <h4 className='font-bold text-base mb-4 text-center'>For individuals</h4>
               <p className='text-gray-medium text-xs mb-8'></p>
               <div className='flex items-center justify-center'>
                 <span className='font-bold text-4xl mr-3 relative'>
                   <div className='absolute -top-5 -left-3'><AttachMoneyOutlinedIcon sx={{ fontSize: 20 }} /></div>
-                  15 /
+                  15<span className='font-medium text-lg relative -top-1'>/month</span>
                 </span>
-                <span className='font-medium text-sm'>Billed <br /> monthly</span>
+                {/* <span className='font-medium text-sm'>Billed <br /> /monthly</span> */}
               </div>
               <div className='text-center my-2 text-gray-dark'>Or</div>
               <div className='relative flex items-center justify-center'>
                 <span className='relative font-bold text-4xl mr-3'>
                   <div className='absolute -top-5 -left-3'><AttachMoneyOutlinedIcon sx={{ fontSize: 20 }} /></div>
-                  150 /
+                  150<span className='font-medium text-lg relative -top-1'>/year</span>
                 </span>
-                <span className='font-medium text-sm'>Billed <br /> yearly</span>
+                {/* <span className='font-medium text-sm'>Billed <br /> /yearly</span> */}
               </div>
-              <div className='text-center my-3 text-gray-dark text-sm'>20% saved</div>
+              <div className='text-center my-3 text-blue-600 font-bold text-sm'>20% saved</div>
               <div className='h-[1px] w-[80%] bg-b2 m-auto my-8'></div>
               <h5 className='w-[60%] text-left m-auto mb-4 text-xl font-semibold'>This plan includes:</h5>
               <ul className='w-[60%] m-auto'>
                 <li className='flex items-center gap-2 text-base font-semibold mb-2'><CheckIcon sx={{ color: pink[500] }} /> 5 GB storage</li>
                 <li className='flex items-center gap-2 text-base font-semibold mb-2'><CheckIcon sx={{ color: pink[500] }} /> 50,000 requests per month</li>
                 <li className='flex items-center gap-2 text-base font-semibold mb-2'><CheckIcon sx={{ color: pink[500] }} /> Automatic Verification</li>
+                <li className='flex items-start gap-2 text-base font-semibold mb-2'><CheckIcon sx={{ color: pink[500] }} /> Guest sign-in without account</li>
+                <li className='flex items-start gap-2 text-base font-semibold mb-2'><CheckIcon sx={{ color: pink[500] }} /> Support for various languages<br/> (English, Vietnamese, Japanese, Korean)</li>
               </ul>
               <div className='px-8 mt-12'>
                 <button className='w-full bg-pink py-2 text-white font-semibold rounded-lg'>Get Started</button>
               </div>
             </div>
-            <div className='w-[400px] rounded-lg py-12 bg-white text-center shadow-custom'>
-              <h4 className='font-bold text-base mb-4'>Professional</h4>
+            <div className='w-[400px] rounded-lg py-12 bg-white shadow-custom'>
+              <h4 className='font-bold text-base mb-4 text-center'>For businesses</h4>
               <p className='text-gray-medium text-xs mb-8'></p>
               <div className='flex items-center justify-center'>
                 <span className='font-bold text-4xl mr-3 relative'>
                   <div className='absolute -top-5 -left-3'><AttachMoneyOutlinedIcon sx={{ fontSize: 20 }} /></div>
-                  25 /
+                  25<span className='font-medium text-lg relative -top-1'>/month</span>
                 </span>
-                <span className='font-medium text-sm'>Billed <br /> monthly</span>
+                {/* <span className='font-medium text-sm'>Billed <br /> /monthly</span> */}
               </div>
               <div className='text-center my-2 text-gray-dark'>Or</div>
               <div className='relative flex items-center justify-center'>
                 <span className='relative font-bold text-4xl mr-3'>
                   <div className='absolute -top-5 -left-3'><AttachMoneyOutlinedIcon sx={{ fontSize: 20 }} /></div>
-                  270 /
+                  270<span className='font-medium text-lg relative -top-1'>/year</span>
                 </span>
-                <span className='font-medium text-sm'>Billed <br /> yearly</span>
+                {/* <span className='font-medium text-sm'>Billed <br /> /yearly</span> */}
               </div>
-              <div className='text-center my-3 text-gray-dark text-sm'>10% saved</div>
+              <div className='text-center my-3 text-red-600 font-bold text-sm'>10% saved</div>
               <div className='h-[1px] w-[80%] bg-b2 m-auto my-8'></div>
               <h5 className='w-[60%] text-left m-auto mb-4 text-xl font-semibold'>This plan includes:</h5>
               <ul className='w-[65%] m-auto'>
                 <li className='flex items-center gap-2 text-base font-semibold mb-2'><CheckIcon sx={{ color: pink[500] }} /> 15 GB storage</li>
                 <li className='flex items-center gap-2 text-base font-semibold mb-2'><CheckIcon sx={{ color: pink[500] }} /> 100,000 requests per month</li>
                 <li className='flex items-center gap-2 text-base font-semibold mb-2'><CheckIcon sx={{ color: pink[500] }} />Two-factor Verification</li>
+                <li className='flex items-center gap-2 text-base font-semibold mb-2'><CheckIcon sx={{ color: pink[500] }} />Fully Customizable API Integration</li>
+                <li className='flex items-center gap-2 text-base font-semibold mb-2'><CheckIcon sx={{ color: pink[500] }} />Dedicated Account Manager</li>
+                <li className='flex items-center gap-2 text-base font-semibold mb-2'><CheckIcon sx={{ color: pink[500] }} />Priority Verification Processing</li>
               </ul>
               <div className='px-8 mt-12'>
                 <button className='w-full bg-pink py-2 text-white font-semibold rounded-lg'>Get Started</button>

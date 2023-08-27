@@ -41,45 +41,54 @@ const DropImageInput = () => {
   const handleSubmit = async () => {
     setLoading(true)
     const imageData = new FormData();
-    imageData.append("image", file); 
+    imageData.append("image", file);
     try {
-      // gọi api check AI
-      const response = await axios.post("http://localhost:5000/ggVision/verify", imageData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        } 
-      });
-      console.log(response)
-      //gọi api compare
-      if (response.data.status) {
-        const verify = await axios.post("http://localhost:5000/verify/check", response.data.response, {
+      if (file) {
+        // gọi api check AI
+        const response = await axios.post("http://localhost:5000/ggVision/verify", imageData, {
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "multipart/form-data",
           }
-        })
-        if (verify.data.status) {
-          const uploadUrl = await upload({
-            data: [file],
-            options: { uploadWithGatewayUrl: true, uploadWithoutDirectory: true },
-          });
-          console.log(uploadUrl)
-          let flag = false
-
-          data?.some((obj) => {
-            return Object.values(obj).some((value) => {
-              if (value === uploadUrl[0]) {
-                flag = true; // Cập nhật biến cờ thành true
-              }
+        });
+        console.log(response)
+        //gọi api compare
+        if (response.data.status) {
+          const verify = await axios.post("http://localhost:5000/verify/check", response.data.response, {
+            headers: {
+              "Content-Type": "application/json",
+            }
+          })
+          if (verify.data.status) {
+            const uploadUrl = await upload({
+              data: [file],
+              options: { uploadWithGatewayUrl: true, uploadWithoutDirectory: true },
             });
-          });
-          console.log(flag)
-          if (!flag) {
-            call(uploadUrl[0], file.name)
+            console.log(uploadUrl)
+            let flag = false
+
+            data?.some((obj) => {
+              return Object.values(obj).some((value) => {
+                if (value === uploadUrl[0]) {
+                  flag = true; // Cập nhật biến cờ thành true
+                }
+              });
+            });
+            console.log(flag)
+            if (!flag) {
+              call(uploadUrl[0], file.name)
+            } else {
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Tài liệu này đã có sẵn!',
+                timer: 1500
+              })
+            }
           } else {
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
-              text: 'Tài liệu này đã có sẵn!',
+              text: 'Dữ liệu không chính xác',
               timer: 1500
             })
           }
@@ -87,7 +96,7 @@ const DropImageInput = () => {
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'Dữ liệu không chính xác',
+            text: 'Vui lòng kiểm tra lại tài liệu của bạn!',
             timer: 1500
           })
         }
@@ -95,12 +104,12 @@ const DropImageInput = () => {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'Vui lòng kiểm tra lại tài liệu của bạn!',
+          text: 'Bạn chưa upload file',
           timer: 1500
         })
       }
     } catch (error) {
-      
+
       console.error("Error submitting image:", error);
     }
     setLoading(false)
@@ -188,15 +197,15 @@ const DropImageInput = () => {
         </p>
       </div>
       {loading ?
-          <div className="mt-12 flex items-center justify-center w-full">
-            <div className="w-16 h-16 border-l-2 border-b-2 border-l-[#15BFFD] border-b-[#15BFFD] rounded-full p-1 animate-spin delay-75">
-              <div className="w-full h-full border-t-2 border-r-2 border-t-[#9C37FD] border-r-[#9C37FD] rounded-full p-1 animate-spin delay-150">
-                <div className="w-full h-full border-l-2 border-b-2 border-l-[#FF2525] border-b-[#FF2525] rounded-full animate-spin delay-200"></div>   
-              </div>   
-            </div>   
+        <div className="mt-12 flex items-center justify-center w-full">
+          <div className="w-16 h-16 border-l-2 border-b-2 border-l-[#15BFFD] border-b-[#15BFFD] rounded-full p-1 animate-spin delay-75">
+            <div className="w-full h-full border-t-2 border-r-2 border-t-[#9C37FD] border-r-[#9C37FD] rounded-full p-1 animate-spin delay-150">
+              <div className="w-full h-full border-l-2 border-b-2 border-l-[#FF2525] border-b-[#FF2525] rounded-full animate-spin delay-200"></div>
+            </div>
           </div>
-          :
-          <button className="mt-12 m-auto flex bg-gradient-to-tr from-[#21D4FD] to-[#B721FF] px-12 py-4 text-xl rounded-lg" type="button" onClick={handleSubmit}>Submit</button>
+        </div>
+        :
+        <button className="mt-12 m-auto flex bg-gradient-to-tr from-[#21D4FD] to-[#B721FF] px-12 py-4 text-xl rounded-lg" type="button" onClick={handleSubmit}>Submit</button>
       }
     </>
   );
