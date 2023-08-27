@@ -11,6 +11,7 @@ import SearchRoundedIcon from '@mui/icons-material/SearchRounded'
 import { ConnectWallet, useAddress, useLogin } from '@thirdweb-dev/react'
 import { PublicKeyContext } from '../../components/PublicKeyContext';
 import { useNavigate } from 'react-router'
+import { NavLink } from 'react-router-dom'
 const Landing = () => {
   const { setPublicKey } = useContext(PublicKeyContext)
   const [input, setInput] = useState('')
@@ -22,7 +23,7 @@ const Landing = () => {
   }
   return (
     <Fragment>
-        <header className='bg-b2'>
+        <header className='bg-b2 border-b-2 border-b-gray-600 fixed w-full z-[100]'>
           <div className="max-w-screen-xl py-3 mx-auto flex justify-between items-center">
             <div className='flex gap-20 items-center'>
               <div className="logo text-2xl font-bold">ProofGuard</div>
@@ -32,6 +33,7 @@ const Landing = () => {
                   <li><a href="">Company</a></li>
                   <li><a href="">Resources</a></li>
                   <li><a href="">Contact</a></li>
+                  <li><NavLink to="/view">View Documents</NavLink></li>
               </ul>
               
             </div>
@@ -43,7 +45,7 @@ const Landing = () => {
             </div>
           </div>
         </header>
-        <section className='bg-b2'>
+        <section className='bg-b2 pt-20'>
           <div className="max-w-screen-xl mx-auto py-24 flex gap-12">
             <div className='flex-1 text-white'>
               <h1 className='text-4xl font-bold leading-10 tracking-wider'>
@@ -57,7 +59,7 @@ const Landing = () => {
               </p>
               <div className='h-[1px] bg-white'></div>
               <div className="search flex items-center my-8 px-4 bg-white rounded-full w-[493px] h-[68px]">
-                <input className='flex-1 outline-none text-b1 px-2 bg-transparent' type="text" placeholder='Enter publicKey to view document' value={input}
+                <input className='flex-1 outline-none text-b1 px-2 bg-transparent' type="text" placeholder='Go to view document as a guest' value={input}
                   onChange={(e) =>setInput(e.target.value)}
                 />
                 <button className='bg-b1 px-3 py-2 rounded-3xl' type='button' onClick={handleSubmit}>View Document</button>

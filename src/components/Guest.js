@@ -1,22 +1,43 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
-import { bg, ielts } from "../assets/index";
+import { bg, ielts, cloud } from "../assets/index";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded"
 import RemoveRedEyeRoundedIcon from '@mui/icons-material/RemoveRedEyeRounded'
 import { useContract, useContractRead } from "@thirdweb-dev/react-core";
 import { PublicKeyContext } from "./PublicKeyContext";
+import SearchIcon from '@mui/icons-material/Search'
+import axios from "axios";
+import Swal from "sweetalert2";
 
-const Modal = ({visible, onClose, image, input, setInput, flag, setFlag}) => {
+const Modal = ({visible, onClose, image, input, setInput, flag, setFlag, transaction}) => {
     if (!visible) {
         return false
     }
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
       e.preventDefault()
       console.log(input);
       //viết api ở đây xong trả về true/ false
-      // const res = 
-
+      console.log(transaction);
+      const doc = {
+        data: transaction.hash,
+        publicKey: input?? ' ',
+        signature: transaction.Signature
+      }
+      const res = await axios.post('http://localhost:5000/esign/view', JSON.stringify(doc), 
+      {
+        headers: {'Content-Type': 'application/json'}
+      })
       // gắn vào flag
-      setFlag(true)
+      if(res.data){
+        setFlag(true)  
+
+      }else{
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Invaid public key!',
+          timer: 1500
+        })
+      }
     }
     const handleOnClose = () => {
       setInput('')
@@ -59,26 +80,43 @@ const Guest = () => {
   const { data, isLoading } = useContractRead(contract, "getAllSigned")
   const [error, setError] = useState(false)
   const [transaction, setTransaction] = useState()
+  const [transaction2, setTransaction2] = useState([])
+
   const { publicKey } = useContext(PublicKeyContext);
   const [input, setInput] = useState('')
   const [flag, setFlag] = useState(false)
+  const [address, setAddress] = useState('')
   console.log(isLoading)
   useEffect(() => {
-    const doc = data?.find(item => item.publicKey === publicKey)
+    setTransaction2(data)
+  }, [data])
+
+  useEffect(() => {
+    const doc = data?.filter(item => item.sender.includes(address))
     if(doc){
       console.log(doc);
-      setTransaction(doc)
+      setTransaction2(doc)
     }else{
       setError(true)
       console.log('Not Found');
     }
-  }, [])
+  },[address])
+
 //   const [transaction, setTransaction] = useState({})
   const handleOnClose = () => setShowModal(false)
   const shortenAddress = (address) => `${address.slice(0, 5)}...${address.slice(address.length - 4)}`;
   return (
     <Fragment>
-        <div className="bg-gradient-to-r w-screen h-screen relative grid grid-cols-3 grid-rows-4 gap-4 p-4">
+        <div className="flex flex-col gap-8 items-center">
+        <div className="z-50 border-[1.5px] w-[30%] bg-gray-900 border-slate-600 rounded-3xl m-10 flex gap-2 items-center">
+          <input 
+            className='bg-gray-900  w-full h-full p-5 rounded-3xl' placeholder="Enter address wallet..."
+            value={address}
+            onChange={(event) => {
+              setAddress(event.target.value)
+            }}
+            />
+        </div>
         <img
             className="w-screen h-screen object-cover absolute"
             src={bg}
@@ -98,27 +136,29 @@ const Guest = () => {
             //       Error loading ...
             //   </div>
             // :
-            <>
-            {data?.map(item => {
+            <div className="bg-gradient-to-r w-screen h-screen relative grid grid-cols-3 grid-rows-4 gap-4 p-4">
+            {transaction2?.map(item => {
               return(
                   <div className="py-6 border-[1px] border-[rgba(255, 255, 255, .2)] backdrop-blur-xl rounded-xl">
-                      <div className="w-full h-full flex items-center justify-center gap-4">
-                        <div className="p-4 w-24 h-full border-[1px] relative group"
-                            onClick={() => setShowModal(true)}
+                      <div className="w-full h-full flex items-center justify-center gap-4 px-8">
+                        <div className="p-4 w-24 h-36 border-[1px] relative group flex items-center"
+                            onClick={() => {
+                              setTransaction(item)
+                              setShowModal(true)}}
                         >
-                            <img src={transaction?.hash} alt="" />
+                            <img src={cloud} alt="" />
                             <div className="hidden items-center justify-center absolute w-full h-full top-0 left-0 backdrop-brightness-[0.25] cursor-pointer z-10 group-hover:flex">
                                 <RemoveRedEyeRoundedIcon />
                             </div>
                         </div>
-                        <div>
+                        <div className="flex-1">
                             <div className="flex items-center gap-12 mb-1">
                               <span className="font-bold flex-1">Document name: </span>
-                              <span>Ielts certification </span>
+                              <span>{item.imageName}</span>
                             </div>
                             <div className="flex items-center gap-12 mb-1">
                               <span className="font-bold flex-1">Status: </span>
-                              <span>Verify </span>
+                              <span>Verified </span>
                             </div>
                             <div className="flex items-center gap-12 mb-1">
                               <span className="font-bold flex-1">Upload on: </span>
@@ -137,11 +177,11 @@ const Guest = () => {
                   </div>
               )
             })}
-            </>
+            </div>
               
         }
         </div>
-        <Modal onClose={handleOnClose} visible={showModal} image={transaction?.hash} input={input} setInput={setInput} flag={flag} setFlag={setFlag} />
+        <Modal onClose={handleOnClose} visible={showModal} image={transaction?.hash} input={input} setInput={setInput} flag={flag} setFlag={setFlag} transaction={transaction}/>
     </Fragment>
   );
 };
