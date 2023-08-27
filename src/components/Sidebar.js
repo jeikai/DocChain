@@ -16,8 +16,11 @@ import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import ChevronRightOutlinedIcon from '@mui/icons-material/ChevronRightOutlined'
 import { grey, blue } from '@mui/material/colors';
 import { useNavigate } from 'react-router-dom';
+import { ConnectWallet, useAddress, useLogin } from '@thirdweb-dev/react'
+
 const Sidebar = () => {
   const navigate = useNavigate()
+  const address = useAddress()
   return (
     <aside className='fixed top-0 bottom-0 z-10 w-[250px] shadow-xl shadow-gray-800'>
       <div className='relative h-[100vh] pb-30px overflow-y-auto overflow-x-hidden'>
@@ -27,15 +30,15 @@ const Sidebar = () => {
         <ul className='mt-2 flex flex-col'>
           <li className='mx-1 my-2 cursor-pointer hover:bg-gray-900'>
             <div className='flex items-center px-4 py-2 gap-2'
-            onClick={() => navigate('/admindashboard')}
+            onClick={() => navigate( address === '0x807ed9A362411A5ba06dd8Fea8C69b717C696145' ? '/admindashboard' : '/user')}
             >
               <GridViewOutlinedIcon sx={{ fontSize: 20 }} />
               <span className='text-sm'>Dashboard</span>
-            </div>
+            </div> 
           </li>
           <li className='mx-1 my-2 cursor-pointer hover:bg-gray-900'>
             <div className='flex items-center px-4 py-2 gap-2'
-            onClick={() => navigate('/admindashboard/verified')}
+            onClick={() => navigate( address === '0x807ed9A362411A5ba06dd8Fea8C69b717C696145' ? '/admindashboard/verified' : '/verified')}
             >
               <VerifiedIcon sx={{ fontSize: 20 }} />
               <span className='text-sm'>Verified</span>

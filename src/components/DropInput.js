@@ -47,7 +47,7 @@ const DropImageInput = () => {
       const response = await axios.post("http://localhost:5000/ggVision/verify", imageData, {
         headers: {
           "Content-Type": "multipart/form-data",
-        }
+        } 
       });
       console.log(response)
       //gọi api compare

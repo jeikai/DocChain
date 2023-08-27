@@ -65,7 +65,7 @@ exports.detect = async (req, res) => {
             const promises = [
                 ExtractValue(newString, "Centre", RegExp(`[a-zA-Z]{${2}}\\d{${3}}`)),
                 ExtractValue(newString, "Candidate Number", RegExp(`\\d{6}`)),
-                ExtractValue(newString, "Date", RegExp(`\\d{2}\\/[a-zA-Z]{3}\\/\\d{4}`)),
+                ExtractValueFromText(newString, RegExp(`\\d{2}\\/[a-zA-Z]{3}\\/\\d{4}`)),
                 ExtractValue(newString, "Birth", RegExp(`\\d{2}\\/\\d{2}\\/\\d{4}`)),
                 ExtractValue(newString, "CEFR", RegExp(`[a-zA-Z]{1}\\d{1}`)),
             ];
@@ -76,7 +76,6 @@ exports.detect = async (req, res) => {
                 Birth,
                 CEFR
             ] = await Promise.all(promises);
-
             // Check if any value is null in the response
             if (
                 centreNumber === null ||
@@ -88,7 +87,6 @@ exports.detect = async (req, res) => {
                 res.json({ status: false });
                 return;
             }
-
             response = {
                 CandidateNumber: CandidateNumber,
                 Date_Exam: Date_Exam,
@@ -100,6 +98,7 @@ exports.detect = async (req, res) => {
                 tiltAngle: face_detail.tiltAngle,
                 string_check: newString
             };
+
         } else if (newString.includes("ĐỘC QUYỀN")) {
             const promises = [
                 ExtractValueFromText(newString, RegExp(`\\d{1}[-]{1}\\d{4}[-]{1}\\d{5}`)),
@@ -117,7 +116,7 @@ exports.detect = async (req, res) => {
                 Number: Number,
                 string_check: newString
             };
-        } else if(newString.includes("Certificate") || newString.includes("CERTIFICATE") || newString.includes("certificate")){
+        } else if (newString.includes("Certificate") || newString.includes("CERTIFICATE") || newString.includes("certificate")) {
             const promises = [
                 ExtractValueFromText(newString, RegExp(`[A-Z]*[-]{1}\\d+[-]{1}\\d+`)),
             ];
