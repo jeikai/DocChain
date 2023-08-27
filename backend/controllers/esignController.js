@@ -1,67 +1,13 @@
-const crypto = require('crypto')
+const esignModel = require('../models/esignModel')
 
-exports.generateKeyPair = async (req, res) => {
-    const {publicKey, privateKey} = crypto.generateKeyPairSync('rsa', {
-        modulusLength: 700, 
-        publicKeyEncoding: {
-            type: 'spki',
-            format: 'der'
-        }, 
-        privateKeyEncoding: {
-            type: 'pkcs8',
-            format: 'der'
-        }
-    })
+exports.excute = async(req, res) => {
+    let {publicKey, privateKey} = esignModel.generateKeyPair()
 
-    res.send({publicKey: publicKey.toString('base64'), privateKey: privateKey.toString('base64')})
+    let {data} = req.body
+
+    const {signature} = esignModel.sign({data, privateKey})
+
+    const {verify} = esignModel.verify({data, publicKey, signature})
+
+    res.json({verify, publicKey, signature})
 }
-
-exports.sign = async (req, res) => {
-    debugger
-    let { data } = req.body
-    let {publicKey, privateKey} = crypto.generateKeyPairSync('rsa', {
-        modulusLength: 700, 
-        publicKeyEncoding: {
-            type: 'spki',
-            format: 'der'
-        }, 
-        privateKeyEncoding: {
-            type: 'pkcs8',
-            format: 'der'
-        }
-    })
-
-    publicKey = publicKey.toString('base64')
-    privateKey = privateKey.toString('base64')
-
-    privateKey = crypto.createPrivateKey({
-        key: Buffer.from(privateKey, 'base64'),
-        type: 'pkcs8',
-        format: 'der'
-    })
-
-    const sign = crypto.createSign('SHA256')
-    sign.update(data)
-    sign.end()
-    const signature = sign.sign(privateKey).toString('base64')
-
-    res.send({publicKey: publicKey, signature: signature})
-}
-
-exports.verify = async (req, res) => {
-    let {data, publicKey, signature} = req.body
-    publicKey = crypto.createPublicKey({
-        key: Buffer.from(publicKey, 'base64'),
-        type: 'spki',
-        format: 'der'
-    })
-
-    const verify = crypto.createVerify('SHA256')
-    verify.update(data)
-    verify.end()
-
-    let result = verify.verify(publicKey, Buffer.from(signature, 'base64'))
-
-    res.send({verify: result}) 
-}
-

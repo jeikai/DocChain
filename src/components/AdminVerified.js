@@ -20,7 +20,8 @@ const ViewTable = () => {
   const [image, setImage] = useState('')
   const handleOnClose = () => setShowModal(false)
   const navigate = useNavigate()
-  useEffect(() => { 
+  console.log(data);
+  useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.key === "Escape" || event.keyCode === 27) {
         handleOnClose()
