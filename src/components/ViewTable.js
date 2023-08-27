@@ -9,9 +9,6 @@ import Modal from "./Modal"
 import { useNavigate } from "react-router"
 import { useAddress, useContract, useContractRead } from "@thirdweb-dev/react";
 
-
-
-
 const ViewTable = () => {
   const address = useAddress()
   const { contract } = useContract(process.env.REACT_APP_ADDRESS_CONTRACT);
@@ -20,7 +17,7 @@ const ViewTable = () => {
   const { data: data2 } = useContractRead(contract, "getAllSigned")
   const filterDuplicates = (arr1, arr2, key) => {
     const uniqueElements = arr1?.filter(obj1 => {
-      return arr2?.some(obj2 => obj2[key] === obj1[key]);
+      return !arr2?.some(obj2 => obj2[key] === obj1[key]);
     });
     // return uniqueElements;
     return uniqueElements?.filter(item => item.sender === address);
@@ -28,7 +25,7 @@ const ViewTable = () => {
 
   const filteredArray = filterDuplicates(data, data2, 'hash');
   
-  console.log(data)
+  console.log(data2, filteredArray)
   const [showModal, setShowModal] = useState(false)
   const [image, setImage] = useState('')
   const handleOnClose = () => setShowModal(false)
