@@ -1,5 +1,5 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
-import { bg, ielts, cloud } from "../assets/index";
+import { bg, logo } from "../assets/index";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded"
 import RemoveRedEyeRoundedIcon from '@mui/icons-material/RemoveRedEyeRounded'
 import { useContract, useContractRead } from "@thirdweb-dev/react-core";
@@ -146,7 +146,7 @@ const Guest = () => {
                               setTransaction(item)
                               setShowModal(true)}}
                         >
-                            <img src={cloud} alt="" />
+                            <img src={logo} alt="" className="w-full "/>
                             <div className="hidden items-center justify-center absolute w-full h-full top-0 left-0 backdrop-brightness-[0.25] cursor-pointer z-10 group-hover:flex">
                                 <RemoveRedEyeRoundedIcon />
                             </div>
