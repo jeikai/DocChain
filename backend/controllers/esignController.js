@@ -11,3 +11,18 @@ exports.excute = async(req, res) => {
 
     res.json({verify, publicKey, signature})
 }
+
+exports.view = async(req, res) => {
+    debugger
+    let {data, publicKey, signature} = req.body
+    console.log(publicKey.length);
+    if(publicKey.length === 156){
+
+        const {verify} = esignModel.verify({data, publicKey, signature})
+    
+        res.json(verify)
+
+        return
+    }
+    res.json(false)
+}

@@ -38,7 +38,7 @@ exports.sign = ({data, privateKey}) => {
 }
 
 exports.verify =  ({data, publicKey, signature}) => {
-
+    debugger
     publicKey = crypto.createPublicKey({
         key: Buffer.from(publicKey, 'base64'),
         type: 'spki',
