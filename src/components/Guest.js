@@ -110,7 +110,7 @@ const Guest = () => {
       <div className="flex flex-col gap-8 items-center">
         <div className=" border-[1.5px] w-[30%] bg-gray-900 border-slate-600 rounded-3xl m-10 flex gap-2 items-center">
           <input
-            className='bg-gray-900  w-full h-full p-5 rounded-3xl' placeholder="Enter address wallet..."
+            className='bg-gray-900 z-50 w-full h-full p-5 rounded-3xl' placeholder="Enter address wallet..."
             value={address}
             onChange={(event) => {
               setAddress(event.target.value)
