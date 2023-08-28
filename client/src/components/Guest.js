@@ -31,13 +31,9 @@ const Modal = ({
 			publicKey: input ?? " ",
 			signature: transaction.Signature,
 		};
-		const res = await axios.post(
-			"http://localhost:5000/esign/view",
-			JSON.stringify(doc),
-			{
-				headers: { "Content-Type": "application/json" },
-			}
-		);
+		const res = await axios.post("/v1/esign/view", JSON.stringify(doc), {
+			headers: { "Content-Type": "application/json" },
+		});
 		// gắn vào flag
 		if (res.data) {
 			setFlag(true);
