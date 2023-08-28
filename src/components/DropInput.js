@@ -38,7 +38,7 @@ const DropImageInput = () => {
       })
     }
   }
-  const handleSubmit = async () => {
+  const handleSubmit = async () => { 
     setLoading(true)
     const imageData = new FormData();
     imageData.append("image", file);

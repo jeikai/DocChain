@@ -51,7 +51,7 @@ const ExtractValueFromText = async (string, format) => {
 };
 exports.detect = async (req, res) => {
     let image = req.file;
-    const file_path = image.buffer;
+    const file_path = await image.buffer;
     try {
         let response = {}; // Initialize an empty response object
 
@@ -60,7 +60,7 @@ exports.detect = async (req, res) => {
 
         if (newString.includes('IELTS')) {
             let [face] = await client.faceDetection(file_path);
-            let face_detail = face.faceAnnotations[0];
+            let face_detail = face.faceAnnotations[0]; 
  
             const promises = [
                 ExtractValue(newString, "Centre", RegExp(`[a-zA-Z]{${2}}\\d{${3}}`)),
