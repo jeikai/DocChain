@@ -45,7 +45,7 @@ const DropImageInput = () => {
     try {
       if (file) {
         // gọi api check AI
-        const response = await axios.post("http://localhost:5000/ggVision/verify", imageData, {
+        const response = await axios.post("https://dull-red-eel-ring.cyclic.cloud/ggVision/verify", imageData, {
           headers: {
             "Content-Type": "multipart/form-data",
           }
@@ -53,7 +53,7 @@ const DropImageInput = () => {
         console.log(response)
         //gọi api compare
         if (response.data.status) {
-          const verify = await axios.post("http://localhost:5000/verify/check", response.data.response, {
+          const verify = await axios.post("https://dull-red-eel-ring.cyclic.cloud/verify/check", response.data.response, {
             headers: {
               "Content-Type": "application/json",
             }
